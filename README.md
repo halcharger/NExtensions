@@ -15,8 +15,7 @@ From the **Package Manager Console** in Visual Studio simply run
 Usage
 -----
 
-String extensions
------------------
+###String extensions
 
 instead of:
 
@@ -38,8 +37,7 @@ if (user.Username.IsNullOrEmpty())
 
 Which is a little more fluent and readable.
 
-Enumerable extensions
----------------------
+###Enumerable extensions
 
 instead of:
 
