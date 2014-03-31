@@ -3,6 +3,13 @@ NExtensions
 
 Adding .NET framework extension methods to basic types that you thought would have been there but aren't
 
+Install
+-------
+
+NExtensions can be installed from nuget.org, the package is located over [here](https://www.nuget.org/packages/nextensions)
+
+From the package-console in Visual Studio simple run `Install-Package NExtensions`
+
 Some examples:
 
 String extensions
