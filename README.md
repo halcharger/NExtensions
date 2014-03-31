@@ -8,7 +8,7 @@ Install
 
 NExtensions can be installed from nuget.org, the package is located over [here](https://www.nuget.org/packages/nextensions)
 
-From the package-console in Visual Studio simply run 
+From the **Package Manager Console** in Visual Studio simply run 
 
 `PM> Install-Package NExtensions`
 
