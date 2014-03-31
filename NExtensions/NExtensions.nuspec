@@ -7,6 +7,7 @@
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://github.com/halcharger/NExtensions</projectUrl>
+	  <iconUrl>https://raw.githubusercontent.com/halcharger/NExtensions/master/NExtensions/NExtensions.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
 	<summary>Adding basic everyday extensions methods to .NET framework base types that should be there but aren't.</summary>

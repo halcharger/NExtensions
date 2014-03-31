@@ -5,6 +5,7 @@
 *.suo
 *.user
 *.sln.docstates
+NExtensions.*.nupkg
 
 # Build results
 [Dd]ebug/
