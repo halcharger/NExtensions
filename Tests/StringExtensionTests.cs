@@ -30,5 +30,37 @@ namespace Tests
 
             value.IsNullOrEmpty().Should().BeFalse();
         }
+
+        [Test]
+        public void IsNullOrWhiteSpace_ShouldReturn_True_WhenStringIsNull()
+        {
+            string value = null;
+
+            value.IsNullOrWhiteSpace().Should().BeTrue();
+        }
+
+        [Test]
+        public void IsNullOrWhiteSpace_ShouldReturn_True_WhenStringIsEmpty()
+        {
+            string value = "";
+
+            value.IsNullOrWhiteSpace().Should().BeTrue();
+        }
+
+        [Test]
+        public void IsNullOrWhiteSpace_ShouldReturn_True_WhenStringWhiteSpace()
+        {
+            string value = "   ";
+
+            value.IsNullOrWhiteSpace().Should().BeTrue();
+        }
+
+        [Test]
+        public void IsNullOrWhiteSpace_ShouldReturn_False_WhenStringHasValue()
+        {
+            string value = "boom";
+
+            value.IsNullOrWhiteSpace().Should().BeFalse();
+        }
     }
 }
