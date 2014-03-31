@@ -27,3 +27,23 @@ if (user.Username.IsNullOrEmpty())
 ```
 
 Which is a little more fluent and readable.
+
+Enumerable extensions
+---------------------
+
+instead of:
+
+```c#
+foeach(var item in enumerable)
+{
+	DoSomething(item);
+}
+```
+
+we can now write:
+
+```c#
+enumerable.Foreach(DoSomething);
+```
+
+Much more concise and expressive.
