@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("NExtensions")]
-[assembly: AssemblyDescription("Adding .NET framework extension methods to basic types that you thought would have been there but aren't")]
+[assembly: AssemblyDescription("Adding .NET framework extension methods to basic types")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("halcharger")]
 [assembly: AssemblyProduct("NExtensions")]

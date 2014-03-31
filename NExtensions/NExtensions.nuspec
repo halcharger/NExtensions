@@ -9,6 +9,7 @@
     <projectUrl>https://github.com/halcharger/NExtensions</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
+	<summary>Adding basic everyday extensions methods to .NET framework base types that should be there but aren't.</summary>
     <copyright>Copyright 2014</copyright>
   </metadata>
 </package>
