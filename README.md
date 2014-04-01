@@ -27,7 +27,7 @@ From the **Package Manager Console** in Visual Studio simply run
 
 `PM> Install-Package NExtensions`
 
-The symbols have also been pushed along with the nuget package so you should be able to step into the source if your Visual Studio is configure correctly. To configure your Visual Studio go to Debug > Options and Settings and make the following changes:
+The symbols have also been pushed along with the nuget package so you should be able to step into the source if your Visual Studio is configured correctly. To configure your Visual Studio go to **Debug > Options and Settings** and make the following changes:
 
 * Under General, turn **off** “Enable Just My Code”
 * Under General, turn **on** “Enable source server support”. You may have to Ok a security warning.
