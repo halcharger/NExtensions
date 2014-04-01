@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NExtensions
 {
@@ -70,6 +71,34 @@ namespace NExtensions
             return input.Replace(toRemove, string.Empty);
         }
 
+        public static IEnumerable<string> SplitBy(this string value, string delimiter, StringRemoveOptions options = null)
+        {
+            options = options ?? new StringRemoveOptions();
+
+            var splitValues = value.Split(new[] { delimiter }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (options.TrimWhiteSpace)
+                return splitValues.Select(s => s.Trim()).Where(s => !s.IsNullOrWhiteSpace()).ToArray();
+
+            return splitValues;
+        }
+
+        public static IEnumerable<string> SplitByComma(this string value, StringRemoveOptions options = null)
+        {
+            return value.SplitBy(",", options);
+        }
+
+        public static IEnumerable<string> SplitBySemiColon(this string value, StringRemoveOptions options = null)
+        {
+            return value.SplitBy(";", options);
+        }
+
+        public static IEnumerable<string> SplitByNewLine(this string value, StringRemoveOptions options = null)
+        {
+            return value.SplitBy(Environment.NewLine, options);
+        }
+
+
     }
 
     public class StringJoinOptions
@@ -82,5 +111,12 @@ namespace NExtensions
         public string SeperatorSuffix { get; set; }
 
         public static StringJoinOptions AddSpace { get { return new StringJoinOptions { SeperatorSuffix = " " }; } }
+    }
+
+    public class StringRemoveOptions
+    {
+        public bool TrimWhiteSpace { get; set; }
+
+        public static StringRemoveOptions Trim { get { return new StringRemoveOptions { TrimWhiteSpace = true }; } }
     }
 }

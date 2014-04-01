@@ -114,6 +114,63 @@ values.JoinWithSemiColon(StringJoinOptions.AddSpace) == "one; two; three";
 values.JoinWithNewLine() == "one\r\ntwo\r\nthree";
 ```
 
+#####StringExtensions.SplitBy and variants
+
+Given:
+
+```c#
+var value = "one/ two/three/ ";
+```
+
+Instead of:
+
+```c#
+var values = string.Split(new{"/"}, StringSplitOptions.RemoveEmptyEntries);
+```
+
+We can write:
+
+```c#
+var values = value.SplitBy("/");
+```
+
+Which both result in:
+
+```c#
+values.Length == 4
+values[0] == "one"
+values[1] == " two"
+values[2] == "three"
+values[3] == " "
+```
+
+But with the SplitBy extension method we can also write this:
+
+```c#
+var values = value.SplitBy("/", StringRemoveOptions.Trim);
+```
+
+Which then results in this:
+
+```c#
+values.Length == 3
+values[0] == "one"
+values[1] == "two"
+values[2] == "three"
+```
+
+Other variants which are hopefully self explanatory are:
+
+```c#
+var values = value.SplitByComma();
+
+var values = value.SplitBySemiColon();
+
+var values = value.SpliyByNewLine();
+```
+
+All the above variants also accept an optional options parameter with which we can specify to trim the split string values.
+
 #####StringExtensions.Append
 
 Given:

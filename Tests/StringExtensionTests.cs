@@ -1,4 +1,6 @@
-﻿using FluentAssertions;
+﻿using System;
+using System.Linq;
+using FluentAssertions;
 using NExtensions;
 using NUnit.Framework;
 
@@ -134,5 +136,67 @@ namespace Tests
         {
             "onetwothree".Remove("blah").Should().Be("onetwothree");
         }
+
+        [Test]
+        public void SplitBy_ReturnsEnumerableSplitBySeperator()
+        {
+            var value = "one/two /three/ ";
+            var values = value.SplitBy("/").ToArray();
+
+            values.Length.Should().Be(4);
+            values[0].Should().Be("one");
+            values[1].Should().Be("two ");
+            values[2].Should().Be("three");
+            values[3].Should().Be(" ");
+        }
+
+        [Test]
+        public void SplitBy_ReturnsEnumerableSplitBySeperatorAndRemoveWhiteSpace()
+        {
+            var value = "one/two /three/ ";
+            var values = value.SplitBy("/", StringRemoveOptions.Trim).ToArray();
+
+            values.Length.Should().Be(3);
+            values[0].Should().Be("one");
+            values[1].Should().Be("two");
+            values[2].Should().Be("three");
+        }
+
+        [Test]
+        public void SplitByComma_SplitsByComma()
+        {
+            var value = "one,two ,three, ";
+            var values = value.SplitByComma(StringRemoveOptions.Trim).ToArray();
+
+            values.Length.Should().Be(3);
+            values[0].Should().Be("one");
+            values[1].Should().Be("two");
+            values[2].Should().Be("three");
+        }
+
+        [Test]
+        public void SplitBySemiColon_SplitsBySemiColon()
+        {
+            var value = "one;two ;three; ";
+            var values = value.SplitBySemiColon(StringRemoveOptions.Trim).ToArray();
+
+            values.Length.Should().Be(3);
+            values[0].Should().Be("one");
+            values[1].Should().Be("two");
+            values[2].Should().Be("three");
+        }
+
+        [Test]
+        public void SplitByNewLine_SplitsByNewLine()
+        {
+            var value = string.Concat("one", Environment.NewLine, "two ", Environment.NewLine, "three", Environment.NewLine, " ");
+            var values = value.SplitByNewLine(StringRemoveOptions.Trim).ToArray();
+
+            values.Length.Should().Be(3);
+            values[0].Should().Be("one");
+            values[1].Should().Be("two");
+            values[2].Should().Be("three");
+        }
+
     }
 }
