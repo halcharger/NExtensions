@@ -68,5 +68,60 @@ namespace Tests
         {
             "1 {0} 2 {1}".FormatWith("one", "two").Should().Be("1 one 2 two");
         }
+
+        [Test]
+        public void Append_AddsTwoStringsTogether()
+        {
+            "one".Append("two").Should().Be("onetwo");
+        }
+
+        [Test]
+        public void JoinWithComma_JoinsStringsWithComma()
+        {
+            var strings = new[] {"one", "two", "three"};
+
+            strings.JoinWithComma().Should().Be("one,two,three");
+        }
+
+        [Test]
+        public void JoinWithCommaAndaddedSpace_JoinsStringsWithComma()
+        {
+            var strings = new[] { "one", "two", "three" };
+
+            strings.JoinWithComma(StringJoinOptions.AddSpace).Should().Be("one, two, three");
+        }
+
+        [Test]
+        public void JoinWithSemiColon_JoinsStringsWithSemiColon()
+        {
+            var strings = new[] { "one", "two", "three" };
+
+            strings.JoinWithSemiColon().Should().Be("one;two;three");
+        }
+
+        [Test]
+        public void JoinWithSemiColonAndAddedSpace_JoinsStringsWithSemiColon()
+        {
+            var strings = new[] { "one", "two", "three" };
+
+            strings.JoinWithSemiColon(StringJoinOptions.AddSpace).Should().Be("one; two; three");
+        }
+
+        [Test]
+        public void JoinWithNewLine_JoinsStringsWithSemiNewLine()
+        {
+            var strings = new[] { "one", "two", "three" };
+
+            strings.JoinWithNewLine().Should().Be("one\r\ntwo\r\nthree");
+        }
+
+        [Test]
+        public void JoinWithDash_JoinsStringsWithDash()
+        {
+            var strings = new[] { "one", "two", "three" };
+
+            strings.JoinWith("-").Should().Be("one-two-three");
+        }
+
     }
 }

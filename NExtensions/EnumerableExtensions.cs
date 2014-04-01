@@ -37,5 +37,11 @@ namespace NExtensions
         {
             return enumerable == null || !enumerable.Any(predicate);
         }
+
+        public static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> collection)
+        {
+            return collection ?? Enumerable.Empty<T>();
+        }
+
     }
 }

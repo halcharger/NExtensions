@@ -1,4 +1,8 @@
-﻿namespace NExtensions
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace NExtensions
 {
     public static class StringExtensions
     {
@@ -32,5 +36,47 @@
         {
             return string.Format(format, args);
         }
+
+        public static string JoinWith<T>(this IEnumerable<T> values, string separator)
+        {
+            return string.Join(separator, values.EmptyIfNull());
+        }
+
+        public static string JoinWithComma<T>(this IEnumerable<T> values, StringJoinOptions options = null)
+        {
+            options = options ?? new StringJoinOptions();
+            return values.JoinWith(",".Append(options.SeperatorSuffix));
+        }
+
+        public static string JoinWithSemiColon<T>(this IEnumerable<T> values, StringJoinOptions options = null)
+        {
+            options = options ?? new StringJoinOptions();
+            return values.JoinWith(";".Append(options.SeperatorSuffix));
+        }
+
+        public static string JoinWithNewLine<T>(this IEnumerable<T> values)
+        {
+            return values.JoinWith(Environment.NewLine);
+        }
+
+        public static string Append(this string value, string valueToAppend)
+        {
+            if (value == null) return value;
+
+            return string.Concat(value, valueToAppend);
+        }
+
+    }
+
+    public class StringJoinOptions
+    {
+        public StringJoinOptions()
+        {
+            SeperatorSuffix = string.Empty;
+        }
+
+        public string SeperatorSuffix { get; set; }
+
+        public static StringJoinOptions AddSpace { get { return new StringJoinOptions { SeperatorSuffix = " " }; } }
     }
 }

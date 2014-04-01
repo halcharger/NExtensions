@@ -68,6 +68,40 @@ We can write:
 "1 {0} 2 {1}".FormatWith("one", "two") == "1 one 2 two";
 ```
 
+#####StringExtensions.JoinWith and variants
+
+Instead of:
+
+```c#
+var values = new []{"one", "two", "three"};
+
+string.Join(values, "/") == "one/two/three";
+```
+
+We can write:
+
+```c#
+var values = new []{"one", "two", "three"};
+
+values.JoinWith("/") == "one/two/three";
+```
+
+And some shortcut variants:
+
+```c#
+var values = new []{"one", "two", "three"};
+
+values.JoinWithComma() == "one,two,three";
+
+values.JoinWithComma(StringJoinOptions.AddSpace) == "one, two, three";
+
+values.JoinWithSemiColon() == "one;two;three";
+
+values.JoinWithSemiColon(StringJoinOptions.AddSpace) == "one; two; three";
+
+values.JoinWithNewLine() == "one\r\ntwo\r\nthree";
+```
+
 ###Enumerable extensions
 
 #####EnumerableExtensions.ForEach
@@ -213,4 +247,4 @@ catch(Exception ex)
 }
 ```
 
-For more extensive documentation on what extension methods are available and how to use them see the tests.
+**For more extensive documentation on what extension methods are available and how to use them see the tests.**
