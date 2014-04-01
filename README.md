@@ -3,6 +3,11 @@ NExtensions
 
 Adding .NET framework extension methods to basic types that you thought would have been there but aren't
 
+About
+-----
+
+NExtensions is a zero-dependency lightweight library containing small simple yet indispensable extension methods for .NET framework base types. These extension methods make your code more concise, more readable and more fluent.
+
 Install
 -------
 
