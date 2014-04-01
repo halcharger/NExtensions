@@ -147,7 +147,7 @@ values[3] == " "
 But with the SplitBy extension method we can also write this:
 
 ```c#
-var values = value.SplitBy("/", StringRemoveOptions.Trim);
+var values = value.SplitBy("/", StringSplitOptions.TrimWhiteSpaceAndRemoveEmptyEntries);
 ```
 
 Which then results in this:
@@ -169,7 +169,7 @@ var values = value.SplitBySemiColon();
 var values = value.SpliyByNewLine();
 ```
 
-All the above variants also accept an optional options parameter with which we can specify to trim the split string values.
+All the above variants also accept an optional options parameter with which we can specify whether to remove empty entries and / or to trim the split string values.
 
 #####StringExtensions.Append
 

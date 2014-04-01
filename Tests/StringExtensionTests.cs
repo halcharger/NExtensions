@@ -3,6 +3,7 @@ using System.Linq;
 using FluentAssertions;
 using NExtensions;
 using NUnit.Framework;
+using StringSplitOptions = NExtensions.StringSplitOptions;
 
 namespace Tests
 {
@@ -90,7 +91,7 @@ namespace Tests
         {
             var strings = new[] { "one", "two", "three" };
 
-            strings.JoinWithComma(StringJoinOptions.AddSpace).Should().Be("one, two, three");
+            strings.JoinWithComma(StringJoinOptions.AddSpaceSuffix).Should().Be("one, two, three");
         }
 
         [Test]
@@ -106,7 +107,7 @@ namespace Tests
         {
             var strings = new[] { "one", "two", "three" };
 
-            strings.JoinWithSemiColon(StringJoinOptions.AddSpace).Should().Be("one; two; three");
+            strings.JoinWithSemiColon(StringJoinOptions.AddSpaceSuffix).Should().Be("one; two; three");
         }
 
         [Test]
@@ -138,9 +139,9 @@ namespace Tests
         }
 
         [Test]
-        public void SplitBy_ReturnsEnumerableSplitBySeperator()
+        public void SplitBy_ReturnsEnumerableSplitBySeperatorWithRemoveEmptyEntriesSetByDefault()
         {
-            var value = "one/two /three/ ";
+            var value = "one/two /three/ /";
             var values = value.SplitBy("/").ToArray();
 
             values.Length.Should().Be(4);
@@ -151,10 +152,24 @@ namespace Tests
         }
 
         [Test]
-        public void SplitBy_ReturnsEnumerableSplitBySeperatorAndRemoveWhiteSpace()
+        public void SplitBy_ReturnsEnumerableSplitBySeperatorWithOnlyTrimWhiteSpace()
         {
-            var value = "one/two /three/ ";
-            var values = value.SplitBy("/", StringRemoveOptions.Trim).ToArray();
+            var value = "one/two /three/ /";
+            var values = value.SplitBy("/", StringSplitOptions.TrimWhiteSpaceFromEntries).ToArray();
+
+            values.Length.Should().Be(5);
+            values[0].Should().Be("one");
+            values[1].Should().Be("two");
+            values[2].Should().Be("three");
+            values[3].Should().Be("");
+            values[4].Should().Be("");
+        }
+
+        [Test]
+        public void SplitBy_ReturnsEnumerableSplitBySeperatorWithTrimWhiteSpaceAndRemoveEmptyEntries()
+        {
+            var value = "one/two /three/ /";
+            var values = value.SplitBy("/", StringSplitOptions.TrimWhiteSpaceAndRemoveEmptyEntries).ToArray();
 
             values.Length.Should().Be(3);
             values[0].Should().Be("one");
@@ -166,7 +181,7 @@ namespace Tests
         public void SplitByComma_SplitsByComma()
         {
             var value = "one,two ,three, ";
-            var values = value.SplitByComma(StringRemoveOptions.Trim).ToArray();
+            var values = value.SplitByComma(StringSplitOptions.TrimWhiteSpaceAndRemoveEmptyEntries).ToArray();
 
             values.Length.Should().Be(3);
             values[0].Should().Be("one");
@@ -178,7 +193,7 @@ namespace Tests
         public void SplitBySemiColon_SplitsBySemiColon()
         {
             var value = "one;two ;three; ";
-            var values = value.SplitBySemiColon(StringRemoveOptions.Trim).ToArray();
+            var values = value.SplitBySemiColon(StringSplitOptions.TrimWhiteSpaceAndRemoveEmptyEntries).ToArray();
 
             values.Length.Should().Be(3);
             values[0].Should().Be("one");
@@ -190,7 +205,7 @@ namespace Tests
         public void SplitByNewLine_SplitsByNewLine()
         {
             var value = string.Concat("one", Environment.NewLine, "two ", Environment.NewLine, "three", Environment.NewLine, " ");
-            var values = value.SplitByNewLine(StringRemoveOptions.Trim).ToArray();
+            var values = value.SplitByNewLine(StringSplitOptions.TrimWhiteSpaceAndRemoveEmptyEntries).ToArray();
 
             values.Length.Should().Be(3);
             values[0].Should().Be("one");

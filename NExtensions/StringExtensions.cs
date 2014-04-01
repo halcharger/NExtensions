@@ -42,16 +42,22 @@ namespace NExtensions
             return string.Join(separator, values.EmptyIfNull());
         }
 
-        public static string JoinWithComma<T>(this IEnumerable<T> values, StringJoinOptions options = null)
+        public static string JoinWithComma<T>(this IEnumerable<T> values, StringJoinOptions options = StringJoinOptions.None)
         {
-            options = options ?? new StringJoinOptions();
-            return values.JoinWith(",".Append(options.SeperatorSuffix));
+            var suffix = GetStringJoinSeperatorSuffix(options);
+            return values.JoinWith(",".Append(suffix));
         }
 
-        public static string JoinWithSemiColon<T>(this IEnumerable<T> values, StringJoinOptions options = null)
+        public static string JoinWithSemiColon<T>(this IEnumerable<T> values, StringJoinOptions options = StringJoinOptions.None)
         {
-            options = options ?? new StringJoinOptions();
-            return values.JoinWith(";".Append(options.SeperatorSuffix));
+            var suffix = GetStringJoinSeperatorSuffix(options);
+            return values.JoinWith(";".Append(suffix));
+        }
+
+        private static string GetStringJoinSeperatorSuffix(StringJoinOptions options)
+        {
+            var shouldAddSpace = (options & StringJoinOptions.AddSpaceSuffix) == StringJoinOptions.AddSpaceSuffix;
+            return shouldAddSpace ? " " : string.Empty;
         }
 
         public static string JoinWithNewLine<T>(this IEnumerable<T> values)
@@ -71,52 +77,51 @@ namespace NExtensions
             return input.Replace(toRemove, string.Empty);
         }
 
-        public static IEnumerable<string> SplitBy(this string value, string delimiter, StringRemoveOptions options = null)
+        public static IEnumerable<string> SplitBy(this string value, string delimiter, StringSplitOptions options = StringSplitOptions.RemoveEmptyEntries)
         {
-            options = options ?? new StringRemoveOptions();
+            var splitValues = value.Split(new[] { delimiter }, System.StringSplitOptions.None);
 
-            var splitValues = value.Split(new[] { delimiter }, StringSplitOptions.RemoveEmptyEntries);
+            if ((options & StringSplitOptions.TrimWhiteSpaceFromEntries) == StringSplitOptions.TrimWhiteSpaceFromEntries ||
+                (options & StringSplitOptions.TrimWhiteSpaceAndRemoveEmptyEntries) == StringSplitOptions.TrimWhiteSpaceAndRemoveEmptyEntries)
+                splitValues = splitValues.Select(s => s.Trim()).ToArray();
 
-            if (options.TrimWhiteSpace)
-                return splitValues.Select(s => s.Trim()).Where(s => !s.IsNullOrWhiteSpace()).ToArray();
+            if ((options & StringSplitOptions.RemoveEmptyEntries) == StringSplitOptions.RemoveEmptyEntries ||
+                (options & StringSplitOptions.TrimWhiteSpaceAndRemoveEmptyEntries) == StringSplitOptions.TrimWhiteSpaceAndRemoveEmptyEntries)
+                splitValues = splitValues.Where(s => !s.IsNullOrEmpty()).ToArray();
 
             return splitValues;
         }
 
-        public static IEnumerable<string> SplitByComma(this string value, StringRemoveOptions options = null)
+        public static IEnumerable<string> SplitByComma(this string value, StringSplitOptions options = StringSplitOptions.RemoveEmptyEntries)
         {
             return value.SplitBy(",", options);
         }
 
-        public static IEnumerable<string> SplitBySemiColon(this string value, StringRemoveOptions options = null)
+        public static IEnumerable<string> SplitBySemiColon(this string value, StringSplitOptions options = StringSplitOptions.RemoveEmptyEntries)
         {
             return value.SplitBy(";", options);
         }
 
-        public static IEnumerable<string> SplitByNewLine(this string value, StringRemoveOptions options = null)
+        public static IEnumerable<string> SplitByNewLine(this string value, StringSplitOptions options = StringSplitOptions.RemoveEmptyEntries)
         {
             return value.SplitBy(Environment.NewLine, options);
         }
 
-
     }
 
-    public class StringJoinOptions
+    [Flags]
+    public enum StringJoinOptions
     {
-        public StringJoinOptions()
-        {
-            SeperatorSuffix = string.Empty;
-        }
-
-        public string SeperatorSuffix { get; set; }
-
-        public static StringJoinOptions AddSpace { get { return new StringJoinOptions { SeperatorSuffix = " " }; } }
+        None = 0, 
+        AddSpaceSuffix = 1
     }
 
-    public class StringRemoveOptions
+    [Flags]
+    public enum StringSplitOptions
     {
-        public bool TrimWhiteSpace { get; set; }
-
-        public static StringRemoveOptions Trim { get { return new StringRemoveOptions { TrimWhiteSpace = true }; } }
+        None = 0, 
+        RemoveEmptyEntries = 1, 
+        TrimWhiteSpaceFromEntries = 2, 
+        TrimWhiteSpaceAndRemoveEmptyEntries = 4
     }
 }
