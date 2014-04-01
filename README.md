@@ -16,6 +16,7 @@ Table of contents
 * [String extensions](https://github.com/halcharger/NExtensions#string-extensions)
 * [Enumerable extensions](https://github.com/halcharger/NExtensions#enumerable-extensions)
 * [Enum extensions](https://github.com/halcharger/NExtensions#enum-extensions)
+* [Exception extensions](https://github.com/halcharger/NExtensions#exception-extensions)
 
 Install
 -------
@@ -198,3 +199,18 @@ You can also use the string description value of an enum value, like this:
 ```c#
 "Run Failed".ToEnum<Status>() == Status.RunFailed;
 ```
+
+###Exception extensions
+
+#####ExceptionExtensions.GetBaseException
+
+Often when handling exceptions you are only interested in the original exception thrown in the stack. In a multi-level exception stack Exception.InnerException only returns the Exception one level down in the stack. you could use Exception.InnerException.InnerException... but this requires you knowing exactly how deep the Exception stack is. Now you can write the following:
+
+```c#
+catch(Exception ex)
+{
+	logger.Error(ex.GetBaseException());
+}
+```
+
+For more extensive documentation on what extension methods are available and how to use them see the tests.
