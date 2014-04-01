@@ -23,27 +23,44 @@ namespace Tests
         }
 
         [Test]
-        public void Empty_IsNullSafe()
+        public void None_IsNullSafe()
         {
             IEnumerable<string> strings = null;
 
-            strings.Empty().Should().BeTrue();
+            strings.None().Should().BeTrue();
         }
 
         [Test]
-        public void Emtpy_ReturnsTrueWhenActuallyIsEmpty()
+        public void None_ReturnsTrueWhenActuallyIsEmpty()
         {
             string[] strings = {};
 
-            strings.Empty().Should().BeTrue();
+            strings.None().Should().BeTrue();
         }
 
         [Test]
-        public void Empty_ReturnFalseWhenEnumerableContainsValues()
+        public void None_ReturnFalseWhenEnumerableContainsValues()
         {
             string[] strings = {"boom"};
 
-            strings.Empty().Should().BeFalse();
+            strings.None().Should().BeFalse();
         }
+
+        [Test]
+        public void NoneWithPredicate_ReturnsTrueWhenNoItemsMeetPredicate()
+        {
+            string[] strings = {"one", "two", "three"};
+
+            strings.None(s => s == "four").Should().BeTrue();
+        }
+
+        [Test]
+        public void NoneWithPredicate_ReturnsFalseWhenItemsMeetPredicate()
+        {
+            string[] strings = { "one", "two", "three" };
+
+            strings.None(s => s == "two").Should().BeFalse();
+        }
+
     }
 }

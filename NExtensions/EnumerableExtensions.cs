@@ -15,11 +15,27 @@ namespace NExtensions
         }
 
         /// <summary>
-        /// Inverse of IEnumerable<T>.Any()
+        /// Determines whether a sequence contains any elements.
         /// </summary>
-        public static bool Empty<T>(this IEnumerable<T> enumerable)
+        /// 
+        /// <returns>
+        /// false if the enumerable sequence contains any elements; otherwise, true.
+        /// </returns>
+        public static bool None<T>(this IEnumerable<T> enumerable)
         {
             return enumerable == null || !enumerable.Any();
+        }
+
+        /// <summary>
+        /// Determines whether any element of a sequence satisfies a condition.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// false if any elements in the enumerable sequence pass the test in the specified predicate; otherwise, true.
+        /// </returns>
+        public static bool None<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate)
+        {
+            return enumerable == null || !enumerable.Any(predicate);
         }
     }
 }

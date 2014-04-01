@@ -33,7 +33,7 @@ Usage
 
 #####StringExtensions.IsNullOrEmpty
 
-instead of:
+Instead of:
 
 ```c#
 if (string.IsNullOrEmpty(user.Username))
@@ -42,7 +42,7 @@ if (string.IsNullOrEmpty(user.Username))
 }
 ```
 
-we can now write:
+We can now write:
 
 ```c#
 if (user.Username.IsNullOrEmpty())
@@ -55,13 +55,13 @@ Which is a little more fluent and readable.
 
 #####StringExtensions.FormatWith
 
-instead of:
+Instead of:
 
 ```c#
 string.Format("1 {0} 2 {1}", "one", "two") == "1 one 2 two";
 ```
 
-we can write:
+We can write:
 
 ```c#
 "1 {0} 2 {1}".FormatWith("one", "two") == "1 one 2 two";
@@ -71,7 +71,7 @@ we can write:
 
 #####EnumerableExtensions.ForEach
 
-instead of:
+Instead of:
 
 ```c#
 foeach(var item in enumerable)
@@ -80,7 +80,7 @@ foeach(var item in enumerable)
 }
 ```
 
-we can now write:
+We can now write:
 
 ```c#
 enumerable.ForEach(DoSomething);
@@ -88,9 +88,9 @@ enumerable.ForEach(DoSomething);
 
 Much more concise and expressive.
 
-#####EnumerableExtensions.Empty
+#####EnumerableExtensions.None
 
-instead of:
+Instead of:
 
 ```c#
 if (!enumerable.Any())
@@ -99,10 +99,28 @@ if (!enumerable.Any())
 }
 ```
 
-we can write:
+We can write:
 
 ```c#
-if (enumerable.Empty())
+if (enumerable.None())
+{
+	//do something...
+}
+```
+
+Instead of:
+
+```c#
+if (!users.Any(u => u.Username == "user123"))
+{
+	//do something...
+}
+```
+
+We can write:
+
+```c#
+if (users.None(u => u.Username == "user123"))
 {
 	//do something...
 }
