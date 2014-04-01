@@ -11,11 +11,11 @@ NExtensions is a zero-dependency lightweight library containing small simple yet
 Table of contents
 -----------------
 
-*[Install](https://github.com/halcharger/NExtensions#install)
-*[Usage](https://github.com/halcharger/NExtensions#usage)
-*[String extensions](https://github.com/halcharger/NExtensions#string-extensions)
-*[Enumerable extensions](https://github.com/halcharger/NExtensions#enumerable-extensions)
-*[Enum extensions](https://github.com/halcharger/NExtensions#enum-extensions)
+* [Install](https://github.com/halcharger/NExtensions#install)
+* [Usage](https://github.com/halcharger/NExtensions#usage)
+* [String extensions](https://github.com/halcharger/NExtensions#string-extensions)
+* [Enumerable extensions](https://github.com/halcharger/NExtensions#enumerable-extensions)
+* [Enum extensions](https://github.com/halcharger/NExtensions#enum-extensions)
 
 Install
 -------
