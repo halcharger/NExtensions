@@ -31,6 +31,8 @@ Usage
 
 ###String extensions
 
+#####StringExtensions.IsNullOrEmpty
+
 instead of:
 
 ```c#
@@ -51,7 +53,23 @@ if (user.Username.IsNullOrEmpty())
 
 Which is a little more fluent and readable.
 
+#####StringExtensions.FormatWith
+
+instead of:
+
+```c#
+string.Format("1 {0} 2 {1}", "one", "two") == "1 one 2 two";
+```
+
+we can write:
+
+```c#
+"1 {0} 2 {1}".FormatWith("one", "two") == "1 one 2 two";
+```
+
 ###Enumerable extensions
+
+#####EnumerableExtensions.ForEach
 
 instead of:
 
@@ -70,7 +88,29 @@ enumerable.ForEach(DoSomething);
 
 Much more concise and expressive.
 
+#####EnumerableExtensions.Empty
+
+instead of:
+
+```c#
+if (!enumerable.Any())
+{
+	//do something...
+}
+```
+
+we can write:
+
+```c#
+if (enumerable.Empty())
+{
+	//do something...
+}
+```
+
 ###Enum extensions
+
+#####Enums.GetDescription
 
 In many instances we want to display a friendly name for an enum value. For example given the following enum:
 
@@ -106,3 +146,37 @@ Status.RunSucceeded.GetDescription() == "Run Succeeded"
 ```
 
 You'll notice that when a `DescriptionAttribute` is not applied the standard enum ToString value is returned.
+
+#####Enums.GetValues
+
+In order to get a list of enum values for display in the UI or comparision we can write:
+
+```c#
+var enumValues = Enums.GetValues<Status>().ToList();
+
+enumValues[0] == Status.Pending
+enumValues[1] == Status.RunFailed
+enumValues[2] == Status.RunSucceeded
+```
+
+If you don't like using the above syntax you can also write the following:
+
+```c#
+var enumValues = typeof(Status).GetValues<Status>();
+```
+
+Personally it's not my favourite syntax but it's there if you want to use it.
+
+#####Enums.ToEnum
+
+Given the string value of an enum we can quickly convert this back to the enum value by writing the following:
+
+```c#
+"Pending".ToEnum<Status>() == Status.Pending;
+```
+
+You can also use the string description value of an enum value, like this:
+
+```c#
+"Run Failed".ToEnum<Status>() == Status.RunFailed;
+```

@@ -62,5 +62,11 @@ namespace Tests
 
             value.IsNullOrWhiteSpace().Should().BeFalse();
         }
+
+        [Test]
+        public void FormatWith_CorrectlyFormatsString()
+        {
+            "1 {0} 2 {1}".FormatWith("one", "two").Should().Be("1 one 2 two");
+        }
     }
 }

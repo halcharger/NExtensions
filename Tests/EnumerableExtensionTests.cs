@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using NExtensions;
@@ -19,6 +20,30 @@ namespace Tests
             enumberable.ForEach(action);
 
             str.Should().Be("testing12345");
+        }
+
+        [Test]
+        public void Empty_IsNullSafe()
+        {
+            IEnumerable<string> strings = null;
+
+            strings.Empty().Should().BeTrue();
+        }
+
+        [Test]
+        public void Emtpy_ReturnsTrueWhenActuallyIsEmpty()
+        {
+            string[] strings = {};
+
+            strings.Empty().Should().BeTrue();
+        }
+
+        [Test]
+        public void Empty_ReturnFalseWhenEnumerableContainsValues()
+        {
+            string[] strings = {"boom"};
+
+            strings.Empty().Should().BeFalse();
         }
     }
 }
