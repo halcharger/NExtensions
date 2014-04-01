@@ -32,6 +32,16 @@ namespace NExtensions
             return string.IsNullOrWhiteSpace(value);
         }
 
+        /// <summary>
+        /// Returns the inverse of input.IsNullOrEmpty()
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static bool HasValue(this string input)
+        {
+            return !input.IsNullOrEmpty();
+        }
+
         public static string FormatWith(this string format, params object[] args)
         {
             return string.Format(format, args);
