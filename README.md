@@ -62,41 +62,47 @@ Which is a little more fluent and readable.
 
 #####StringExtensions.FormatWith
 
+Given:
+
+```c#
+var template = "1 {0} 2 {1}";
+```
+
 Instead of:
 
 ```c#
-string.Format("1 {0} 2 {1}", "one", "two") == "1 one 2 two";
+string.Format(template, "one", "two") == "1 one 2 two";
 ```
 
 We can write:
 
 ```c#
-"1 {0} 2 {1}".FormatWith("one", "two") == "1 one 2 two";
+template.FormatWith("one", "two") == "1 one 2 two";
 ```
 
 #####StringExtensions.JoinWith and variants
 
-Instead of:
+Given:
 
 ```c#
 var values = new []{"one", "two", "three"};
+```
 
+Instead of:
+
+```c#
 string.Join(values, "/") == "one/two/three";
 ```
 
 We can write:
 
 ```c#
-var values = new []{"one", "two", "three"};
-
 values.JoinWith("/") == "one/two/three";
 ```
 
 And some shortcut variants:
 
 ```c#
-var values = new []{"one", "two", "three"};
-
 values.JoinWithComma() == "one,two,three";
 
 values.JoinWithComma(StringJoinOptions.AddSpace) == "one, two, three";
@@ -106,6 +112,27 @@ values.JoinWithSemiColon() == "one;two;three";
 values.JoinWithSemiColon(StringJoinOptions.AddSpace) == "one; two; three";
 
 values.JoinWithNewLine() == "one\r\ntwo\r\nthree";
+```
+
+#####StringExtensions.Append
+
+Given:
+
+```c#
+string one = "one";
+string two = "two";
+```
+
+Instead of:
+
+```c#
+string.Concat(one, two) == "onetwo";
+```
+
+We can write:
+
+```c#
+one.Append(two) == "onetwo";
 ```
 
 ###Enumerable extensions
