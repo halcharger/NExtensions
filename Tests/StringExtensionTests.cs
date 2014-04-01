@@ -123,5 +123,16 @@ namespace Tests
             strings.JoinWith("-").Should().Be("one-two-three");
         }
 
+        [Test]
+        public void Remove_CorrectlyRemovesText()
+        {
+            "onetwothree".Remove("two").Should().Be("onethree");
+        }
+
+        [Test]
+        public void RemoveDoesNothingWhenStringToRemoveNotFound()
+        {
+            "onetwothree".Remove("blah").Should().Be("onetwothree");
+        }
     }
 }

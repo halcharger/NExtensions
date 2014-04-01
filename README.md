@@ -135,6 +135,26 @@ We can write:
 one.Append(two) == "onetwo";
 ```
 
+#####StringExtensions.Remove
+
+Given:
+
+```c#
+var value = "onetwothree";
+```
+
+Instead of:
+
+```c#
+value.Replace("two", string.Empty) == "onethree";
+```
+
+We can write:
+
+```c#
+value.Remove("two") == "onethree";
+```
+
 ###Enumerable extensions
 
 #####EnumerableExtensions.ForEach

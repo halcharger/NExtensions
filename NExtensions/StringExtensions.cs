@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace NExtensions
 {
@@ -64,6 +63,11 @@ namespace NExtensions
             if (value == null) return value;
 
             return string.Concat(value, valueToAppend);
+        }
+
+        public static string Remove(this string input, string toRemove)
+        {
+            return input.Replace(toRemove, string.Empty);
         }
 
     }
