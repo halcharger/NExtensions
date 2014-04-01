@@ -3,6 +3,16 @@ NExtensions
 
 Adding .NET framework extension methods to basic types that you thought would have been there but aren't
 
+Table of contents
+-----------------
+
+[About](https://github.com/halcharger/NExtensions#about)
+[Install](https://github.com/halcharger/NExtensions#install)
+[Usage](https://github.com/halcharger/NExtensions#usage)
+[String extensions](https://github.com/halcharger/NExtensions#string-extensions)
+[Enumerable extensions](https://github.com/halcharger/NExtensions#enumerable-extensions)
+[Enum extensions](https://github.com/halcharger/NExtensions#enum-extensions)
+
 About
 -----
 
