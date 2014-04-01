@@ -60,3 +60,40 @@ enumerable.ForEach(DoSomething);
 ```
 
 Much more concise and expressive.
+
+###Enum extensions
+
+In many instances we want to display a friendly name for an enum value. For example given the following enum:
+
+```c#
+public enum Status
+{
+	Pending
+	RunFailed
+	RunSucceeded
+}
+```
+
+When displaying these enum values in a UI we ideally would want to display the values "Run Failed" instead of "RunFailed" and so on. We can apply the `System.ComponentModel.DescriptionAttribute` like this:
+
+```c#
+public enum Status
+{
+	Pending
+	[Description("Run Failed")]
+	RunFailed
+	[Description("Run Suceeded")]
+	RunSucceeded
+}
+```
+And then access the descriptive text of an enum value like this:
+
+```c#
+Status.Pending.GetDescription() == "Pending"
+
+Status.RunFailed.GetDescription() == "Run Failed"
+
+Status.RunSucceeded.GetDescription() == "Run Succeeded"
+```
+
+You'll notice that when a `DescriptionAttribute` is not applied the standard enum ToString value is returned.

@@ -16,7 +16,7 @@ namespace Tests
             var str = "testing";
             Action<int> action = i => str = str + i.ToString(); 
 
-            enumberable.Foreach(action);
+            enumberable.ForEach(action);
 
             str.Should().Be("testing12345");
         }
