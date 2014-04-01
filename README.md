@@ -51,7 +51,7 @@ foeach(var item in enumerable)
 we can now write:
 
 ```c#
-enumerable.Foreach(DoSomething);
+enumerable.ForEach(DoSomething);
 ```
 
 Much more concise and expressive.

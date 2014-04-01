@@ -8,7 +8,7 @@ namespace NExtensions
         /// <summary>
         /// Executes the given Action<T> for each item in the enumerable
         /// </summary>
-        public static void Foreach<T>(this IEnumerable<T> enumerable, Action<T> action)
+        public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)
         {
             foreach (var item in enumerable) action(item);
         }
