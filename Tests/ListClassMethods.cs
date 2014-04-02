@@ -20,7 +20,7 @@ namespace Tests
 
         private void PrintOutClassMethods(string heading, Type classType)
         {
-            Console.WriteLine("###" + heading);
+            Console.WriteLine("#####" + heading);
             classType.GetMethods(BindingFlags.Public | BindingFlags.Static).OrderBy(mi => mi.Name).ForEach(mi => Console.WriteLine("* " + mi.Name));
         }
     }

@@ -36,19 +36,26 @@ The symbols have also been pushed along with the nuget package so you should be 
 Extensions Summary
 ------------------
 
-###Enumerable extentions
+#####Enumerable extentions
+
 * EmptyIfNull
 * ForEach
 * None
 * None
-###Enum extentions
+
+#####Enum extentions
+
 * GetDescription
 * GetValues
 * GetValues
 * ToEnum
-###Exception extentions
+
+#####Exception extentions
+
 * GetBaseException
-###String extentions
+
+#####String extentions
+
 * Append
 * FormatWith
 * HasValue
