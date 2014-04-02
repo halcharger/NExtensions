@@ -42,6 +42,10 @@ Extensions Summary
 
 * GetBaseException
 
+#####[Numeric extentions](https://github.com/halcharger/NExtensions/wiki/Numeric-extensions)
+
+* Absolute
+
 #####[String extentions](https://github.com/halcharger/NExtensions/wiki/String-extensions)
 
 * Append

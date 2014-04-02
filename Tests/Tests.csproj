@@ -50,6 +50,7 @@
     <Compile Include="EnumExtensionTests.cs" />
     <Compile Include="ExceptionExtensionTests.cs" />
     <Compile Include="ListClassMethods.cs" />
+    <Compile Include="NumericExtensionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringExtensionTests.cs" />
   </ItemGroup>
