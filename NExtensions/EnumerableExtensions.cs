@@ -50,10 +50,20 @@ namespace NExtensions
 
         public static bool ContainsAll<T>(this IEnumerable<T> collection, IEnumerable<T> otherCollection)
         {
+            return collection.ContainsAll(otherCollection.ToArray());
+        }
+
+        public static bool ContainsAll<T>(this IEnumerable<T> collection, params T[] otherCollection)
+        {
             return otherCollection.All(collection.Contains);
         }
 
         public static bool ContainsNone<T>(this IEnumerable<T> collection, IEnumerable<T> otherCollection)
+        {
+            return collection.ContainsNone(otherCollection.ToArray());
+        }
+
+        public static bool ContainsNone<T>(this IEnumerable<T> collection, params T[] otherCollection)
         {
             return otherCollection.None(collection.Contains);
         }
