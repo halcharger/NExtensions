@@ -43,5 +43,20 @@ namespace NExtensions
             return collection ?? Enumerable.Empty<T>();
         }
 
+        public static bool IsNullOrEmpty<T>(this IEnumerable<T> collection)
+        {
+            return collection == null || collection.None();
+        }
+
+        public static bool ContainsAll<T>(this IEnumerable<T> collection, IEnumerable<T> otherCollection)
+        {
+            return otherCollection.All(collection.Contains);
+        }
+
+        public static bool ContainsNone<T>(this IEnumerable<T> collection, IEnumerable<T> otherCollection)
+        {
+            return otherCollection.None(collection.Contains);
+        }
+
     }
 }

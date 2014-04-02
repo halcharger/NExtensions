@@ -28,8 +28,11 @@ Extensions Summary
 
 #####[Enumerable extentions](https://github.com/halcharger/NExtensions/wiki/Enumerable-extensions)
 
+* ContainsAll
+* ContainsNone
 * EmptyIfNull
 * ForEach
+* IsNullOrEmpty
 * None
 
 #####[Enum extentions](https://github.com/halcharger/NExtensions/wiki/Enum-extensions)

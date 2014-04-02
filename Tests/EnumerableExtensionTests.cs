@@ -62,5 +62,19 @@ namespace Tests
             strings.None(s => s == "two").Should().BeFalse();
         }
 
+        [TestCase("1,2,3,4,5,", "2,3,4", true)]
+        [TestCase("1,2,3,4,5,", "2,3,4,6", false)]
+        public void ContainsAll_WorksCorrectly(string listToCheck, string itemsToCheckFor, bool expectedValue)
+        {
+            listToCheck.SplitByComma().ContainsAll(itemsToCheckFor.SplitByComma()).Should().Be(expectedValue);
+        }
+
+        [TestCase("1,2,3,4,5,", "6,7,8", false)]
+        [TestCase("1,2,3,4,5,", "2,3,4", true)]
+        public void ContainsNone_WorksCorrectly(string listToCheck, string itemsToCheckFor, bool expectedValue)
+        {
+            listToCheck.SplitByComma().ContainsAll(itemsToCheckFor.SplitByComma()).Should().Be(expectedValue);
+        }
+
     }
 }
