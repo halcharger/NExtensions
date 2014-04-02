@@ -34,6 +34,7 @@ Extensions Summary
 * ForEach
 * IsNullOrEmpty
 * None
+* ToEnumerable
 
 #####[Enum extentions](https://github.com/halcharger/NExtensions/wiki/Enum-extensions)
 

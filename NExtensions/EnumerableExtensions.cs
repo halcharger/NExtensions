@@ -68,5 +68,9 @@ namespace NExtensions
             return otherCollection.None(collection.Contains);
         }
 
+        public static IEnumerable<T> ToEnumerable<T>(this T item)
+        {
+            yield return item;
+        }
     }
 }
