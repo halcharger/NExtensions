@@ -33,8 +33,39 @@ The symbols have also been pushed along with the nuget package so you should be 
 * Under General, turn **on** “Enable source server support”. You may have to Ok a security warning.
 * Under Symbols, add “http://srv.symbolsource.org/pdb/Public” to the list. 
 
-Usage
------
+Extensions Summary
+------------------
+
+###Enumerable extentions
+* EmptyIfNull
+* ForEach
+* None
+* None
+###Enum extentions
+* GetDescription
+* GetValues
+* GetValues
+* ToEnum
+###Exception extentions
+* GetBaseException
+###String extentions
+* Append
+* FormatWith
+* HasValue
+* IsNullOrEmpty
+* IsNullOrWhiteSpace
+* JoinWith
+* JoinWithComma
+* JoinWithNewLine
+* JoinWithSemiColon
+* Remove
+* SplitBy
+* SplitByComma
+* SplitByNewLine
+* SplitBySemiColon
+
+Detailed Usage
+--------------
 
 ###String extensions
 
