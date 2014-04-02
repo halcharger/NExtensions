@@ -82,9 +82,22 @@ namespace NExtensions
             return string.Concat(value, valueToAppend);
         }
 
-        public static string Remove(this string input, string toRemove)
+        public static string Remove(this string input, params string[] toRemove)
         {
-            return input.Replace(toRemove, string.Empty);
+            toRemove.ForEach(r => input = input.Replace(r, string.Empty));
+            return input;
+        }
+
+        public static bool ContainsAny(this string input, params string[] contains)
+        {
+            if (input == null) return false;
+            return contains.Any(input.Contains);
+        }
+
+        public static bool ContainsAll(this string input, params string[] contains)
+        {
+            if (input == null) return false;
+            return contains.All(input.Contains);
         }
 
         public static IEnumerable<string> SplitBy(this string value, string delimiter, StringSplitOptions options = StringSplitOptions.RemoveEmptyEntries)
@@ -116,6 +129,57 @@ namespace NExtensions
         {
             return value.SplitBy(Environment.NewLine, options);
         }
+
+        public static bool ToBoolean(this string input)
+        {
+            var trueValues = new[] { "true", "on", "1" };
+            var falseValues = new[] { "false", "off", "0" };
+
+            if (trueValues.Contains(input.ToLower())) return true;
+            if (falseValues.Contains(input.ToLower())) return false;
+
+            return Convert.ToBoolean(input);
+        }
+
+        public static decimal ToDecimal(this string input)
+        {
+            if (input == null) throw new ArgumentException("Cannot convert empty value to a Decimal");
+
+            string s = input.Remove("(", ")", ",");
+
+            if (s.IsNullOrEmpty()) throw new ArgumentException("Cannot convert Empty String to Decimal");
+
+            if (s == "-") return 0M;
+
+            bool percent = false;
+            if (s.EndsWith("%"))
+            {
+                s = s.Remove("%");
+                percent = true;
+            }
+
+            decimal result;
+
+            // detect scientific notation, and convert to double
+            if (s.ContainsAny("E", "e"))
+            {
+                try
+                {
+                    result = (decimal)double.Parse(s);
+                }
+                catch (FormatException)
+                {
+                    throw new FormatException("Couldn't convert value '{0}' to a Decimal".FormatWith(s));
+                }
+            }
+            else
+            {
+                if (!decimal.TryParse(s, out result)) throw new FormatException("Couldn't convert value '{0}' to a Decimal".FormatWith(s));
+            }
+
+            return percent ? result / 100M : result;
+        }
+
 
     }
 

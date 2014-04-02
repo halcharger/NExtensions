@@ -213,5 +213,36 @@ namespace Tests
             values[2].Should().Be("three");
         }
 
+        [TestCase("True", true)]
+        [TestCase("TRUE", true)]
+        [TestCase("true", true)]
+        [TestCase("False", false)]
+        [TestCase("FALSE", false)]
+        [TestCase("false", false)]
+        [TestCase("On", true)]
+        [TestCase("ON", true)]
+        [TestCase("on", true)]
+        [TestCase("Off", false)]
+        [TestCase("OFF", false)]
+        [TestCase("off", false)]
+        [TestCase("1", true)]
+        [TestCase("0", false)]
+        public void ToBoolean_ShouldConvert(string valueToConvert, bool expectedValue)
+        {
+            valueToConvert.ToBoolean().Should().Be(expectedValue);
+        }
+
+        [TestCase("123.45", 123.45)]
+        [TestCase("12,345.67", 12345.67)]
+        [TestCase("(123.45)", 123.45)]
+        [TestCase("-", 0)]
+        [TestCase("123.45%", 1.2345)]
+        [TestCase("1.845E-07", 0.0000001845)]
+        [TestCase("1.845e-07", 0.0000001845)]
+        public void ToDecimal_ShouldConvert(string valueToConvert, decimal expectedValue)
+        {
+            valueToConvert.ToDecimal().Should().Be(expectedValue);
+        }
+
     }
 }

@@ -55,6 +55,8 @@ Extensions Summary
 #####String extentions
 
 * Append
+* ContainsAll
+* ContainsAny
 * FormatWith
 * HasValue
 * IsNullOrEmpty
@@ -68,6 +70,8 @@ Extensions Summary
 * SplitByComma
 * SplitByNewLine
 * SplitBySemiColon
+* ToBoolean
+* ToDecimal
 
 Detailed Usage
 --------------
@@ -246,6 +250,135 @@ We can write:
 
 ```c#
 value.Remove("two") == "onethree";
+```
+
+And instead of:
+
+```c#
+value.Replace("one", string.Empty).Replace("three", string.Empty) == "two";
+```
+
+We can write:
+
+```c#
+value.Remove("one", "three") == "two";
+```
+
+#####StringExtensions.ToBoolean
+
+Given:
+
+```c#
+var value = "true";
+```
+
+Instead of:
+
+```c#
+Convert.ToBoolean(value);
+```
+
+We can write:
+
+```c#
+value.ToBoolean();
+```
+
+ToBoolean supports all case variants of the following strings:
+
+* true
+* false
+* on
+* off
+* 0
+* 1
+
+#####StringExtensions.ToDecimal
+
+Given:
+
+```c#
+var value = "12.345";
+```
+
+Instead of:
+
+```c#
+decimal result;
+if (decimal.TryParse(value, out result))
+	return result;
+else
+	throw new FormatException("Couldn't convert value '{0}' to a Decimal".FormatWith(value))
+```
+
+We can write:
+
+```c#
+value.ToDecimal();
+```
+
+ToDecimal supports all the following number string formats:
+
+```c#
+* "123.45"
+* "12,345.67"
+* "(123.45)"
+* "-" == 0
+* "123.45%" == 1.2345
+* "1.845E-07" == 0.0000001845
+* "1.845e-07" == 0.0000001845
+```
+
+#####StringExtensions.ContainsAll
+
+Given:
+
+```c#
+var value = "one two three four";
+```
+
+Instead of:
+
+```c#
+if (value.Contains("one") && value.Contains("three"))
+{
+	//do something
+}
+```
+
+We can write:
+
+```c#
+if (value.ContainsAll("one", "three"))
+{
+	//do something
+}
+```
+
+#####StringExtensions.ContainsAny
+
+Given:
+
+```c#
+var value = "one two three four";
+```
+
+Instead of:
+
+```c#
+if (value.Contains("one") || value.Contains("three"))
+{
+	//do something
+}
+```
+
+We can write:
+
+```c#
+if (value.ContainsAny("one", "three"))
+{
+	//do something
+}
 ```
 
 ###Enumerable extensions
