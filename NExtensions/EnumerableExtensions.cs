@@ -72,5 +72,16 @@ namespace NExtensions
         {
             yield return item;
         }
+
+        public static IEnumerable<T> GetDuplicates<T>(this IEnumerable<T> collection)
+        {
+            return collection.EmptyIfNull().GroupBy(x => x).Where(x => x.Count() > 1).Select(x => x.Key);
+        }
+
+        public static IEnumerable<IGrouping<TKey, T>> GetDuplicates<T, TKey>(this IEnumerable<T> collection, Func<T, TKey> keySelector)
+        {
+            return collection.EmptyIfNull().GroupBy(keySelector).Where(x => x.Count() > 1);
+        }
+
     }
 }

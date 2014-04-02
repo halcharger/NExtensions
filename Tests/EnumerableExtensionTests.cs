@@ -76,5 +76,43 @@ namespace Tests
             listToCheck.SplitByComma().ContainsAll(itemsToCheckFor.SplitByComma()).Should().Be(expectedValue);
         }
 
+        [TestCase("one,two,three,one,four,two", "one,two")]
+        public void GetDuplicates_ReturnsDuplicates(string list, string expectedDuplicates)
+        {
+            list.SplitByComma().GetDuplicates().JoinWithComma().Should().Be(expectedDuplicates);
+        }
+
+        public void GetDuplicates_ShouldGroupOnSpecifiedField()
+        {
+            var items = new[]
+            {
+                new TestClass(1, "name1"), 
+                new TestClass(2, "name2"), 
+                new TestClass(3, "name3"), 
+                new TestClass(4, "name4"), 
+                new TestClass(5, "name1"), 
+                new TestClass(6, "name2"), 
+                new TestClass(7, "name1")
+            };
+
+            var duplicates = items.GetDuplicates(x => x.Name);
+
+            duplicates.Count().Should().Be(2);
+            duplicates.Count(d => d.Key == "name1").Should().Be(3);
+            duplicates.Count(d => d.Key == "name2").Should().Be(2);
+        }
+    }
+
+    public class TestClass
+    {
+        public TestClass() { }
+
+        public TestClass(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

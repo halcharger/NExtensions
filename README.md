@@ -32,6 +32,7 @@ Extensions Summary
 * ContainsNone
 * EmptyIfNull
 * ForEach
+* GetDuplicates
 * IsNullOrEmpty
 * None
 * ToEnumerable
