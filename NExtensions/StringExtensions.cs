@@ -180,6 +180,19 @@ namespace NExtensions
             return percent ? result / 100M : result;
         }
 
+        public static int ToInteger(this string input)
+        {
+            if (input == null) throw new ArgumentException("Cannot convert empty value to Integer");
+
+            var s = input.Remove("(", ")", ",");
+
+            if (s.IsNullOrWhiteSpace()) throw new ArgumentException("Cannot convert empty value to Integer");
+
+            if (s == "-") return 0;
+
+            return (int) Convert.ToDecimal(s);
+        }
+
 
     }
 

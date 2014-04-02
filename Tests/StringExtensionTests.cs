@@ -244,5 +244,35 @@ namespace Tests
             valueToConvert.ToDecimal().Should().Be(expectedValue);
         }
 
+        [TestCase("123.45", 123)]
+        [TestCase("12,345.67", 12345)]
+        [TestCase("(123.45)", 123)]
+        [TestCase("-", 0)]
+        public void ToInteger_ShouldConvert(string valueToConvert, int expectedValue)
+        {
+            valueToConvert.ToInteger().Should().Be(expectedValue);
+        }
+
+        [TestCase(null)]
+        [TestCase("()")]
+        [TestCase(",")]
+        [TestCase("")]
+        [TestCase(" ")]
+        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "Cannot convert empty value to Integer")]
+        public void ToInteger_ShouldThrowException(string valueToConvert)
+        {
+            valueToConvert.ToInteger();
+        }
+
+        [TestCase(null)]
+        [TestCase("()")]
+        [TestCase(",")]
+        [TestCase("")]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ToDecimal_ShouldThrowException(string valueToConvert)
+        {
+            valueToConvert.ToDecimal();
+        }
+
     }
 }

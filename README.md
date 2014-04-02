@@ -62,6 +62,7 @@ Extensions Summary
 * SplitBySemiColon
 * ToBoolean
 * ToDecimal
+* ToInteger
 
 Detailed Usage
 --------------
