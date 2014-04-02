@@ -91,12 +91,12 @@ namespace NExtensions
         {
             var splitValues = value.Split(new[] { delimiter }, System.StringSplitOptions.None);
 
-            if ((options & StringSplitOptions.TrimWhiteSpaceFromEntries) == StringSplitOptions.TrimWhiteSpaceFromEntries ||
-                (options & StringSplitOptions.TrimWhiteSpaceAndRemoveEmptyEntries) == StringSplitOptions.TrimWhiteSpaceAndRemoveEmptyEntries)
+            if (options.HasFlag(StringSplitOptions.TrimWhiteSpaceFromEntries) ||
+                options.HasFlag(StringSplitOptions.TrimWhiteSpaceAndRemoveEmptyEntries))
                 splitValues = splitValues.Select(s => s.Trim()).ToArray();
 
-            if ((options & StringSplitOptions.RemoveEmptyEntries) == StringSplitOptions.RemoveEmptyEntries ||
-                (options & StringSplitOptions.TrimWhiteSpaceAndRemoveEmptyEntries) == StringSplitOptions.TrimWhiteSpaceAndRemoveEmptyEntries)
+            if (options.HasFlag(StringSplitOptions.RemoveEmptyEntries) ||
+                options.HasFlag(StringSplitOptions.TrimWhiteSpaceAndRemoveEmptyEntries))
                 splitValues = splitValues.Where(s => !s.IsNullOrEmpty()).ToArray();
 
             return splitValues;
