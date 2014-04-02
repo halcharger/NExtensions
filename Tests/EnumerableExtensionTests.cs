@@ -82,6 +82,7 @@ namespace Tests
             list.SplitByComma().GetDuplicates().JoinWithComma().Should().Be(expectedDuplicates);
         }
 
+        [Test]
         public void GetDuplicates_ShouldGroupOnSpecifiedField()
         {
             var items = new[]
@@ -98,8 +99,18 @@ namespace Tests
             var duplicates = items.GetDuplicates(x => x.Name);
 
             duplicates.Count().Should().Be(2);
-            duplicates.Count(d => d.Key == "name1").Should().Be(3);
-            duplicates.Count(d => d.Key == "name2").Should().Be(2);
+
+            var name1Duplicates = duplicates.First().ToList();
+            name1Duplicates.Count().Should().Be(3);
+            name1Duplicates[0].Id.Should().Be(1);
+            name1Duplicates[1].Id.Should().Be(5);
+            name1Duplicates[2].Id.Should().Be(7);
+
+            var name2Duplicates = duplicates.Last().ToList();
+            name2Duplicates.Count().Should().Be(2);
+            name2Duplicates[0].Id.Should().Be(2);
+            name2Duplicates[1].Id.Should().Be(6);
+
         }
     }
 
@@ -114,5 +125,6 @@ namespace Tests
         }
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Email { get; set; }
     }
 }
