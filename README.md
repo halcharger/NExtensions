@@ -8,16 +8,6 @@ About
 
 NExtensions is a zero-dependency lightweight library containing small simple yet indispensable extension methods for .NET framework base types. These extension methods make your code more concise, more readable and more fluent.
 
-Table of contents
------------------
-
-* [Install](https://github.com/halcharger/NExtensions#install)
-* [Usage](https://github.com/halcharger/NExtensions#usage)
-* [String extensions](https://github.com/halcharger/NExtensions#string-extensions)
-* [Enumerable extensions](https://github.com/halcharger/NExtensions#enumerable-extensions)
-* [Enum extensions](https://github.com/halcharger/NExtensions#enum-extensions)
-* [Exception extensions](https://github.com/halcharger/NExtensions#exception-extensions)
-
 Install
 -------
 
