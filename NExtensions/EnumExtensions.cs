@@ -5,6 +5,11 @@ using System.Linq;
 
 namespace NExtensions
 {
+    /// <summary>
+    /// Why is this class named 'Enums' as opposed to the overall convention which would stipulate the name 'EnumExtensions'?
+    /// Simply to make the call Enums.GetValues<SomeEnumType> shorter and more concise when using parameterless overload instead of the typical extension method approach, that's all.
+    /// </summary>
+
     public static class Enums
     {
         public static string GetDescription<T>(this T value) where T : struct
