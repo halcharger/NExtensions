@@ -41,12 +41,10 @@ Extensions Summary
 * EmptyIfNull
 * ForEach
 * None
-* None
 
 #####Enum extentions
 
 * GetDescription
-* GetValues
 * GetValues
 * ToEnum
 
