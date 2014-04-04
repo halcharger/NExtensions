@@ -26,6 +26,18 @@ The symbols have also been pushed along with the nuget package so you should be 
 Extensions Summary
 ------------------
 
+#####[DateTime extentions](https://github.com/halcharger/NExtensions/wiki/DateTime-extensions)
+
+* IsFriday
+* IsMonday
+* IsSaturday
+* IsSunday
+* IsThursday
+* IsTuesday
+* IsWednesday
+* IsWeekday
+* IsWeekend
+
 #####[Enumerable extentions](https://github.com/halcharger/NExtensions/wiki/Enumerable-extensions)
 
 * ContainsAll

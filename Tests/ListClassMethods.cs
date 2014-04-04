@@ -15,6 +15,7 @@ namespace Tests
         [Test]
         public void ListStringExtensionMethods()
         {
+            PrintOutClassMethods("[DateTime extentions](https://github.com/halcharger/NExtensions/wiki/DateTime-extensions)", typeof(DateTimeExtensions));
             PrintOutClassMethods("[Enumerable extentions](https://github.com/halcharger/NExtensions/wiki/Enumerable-extensions)", typeof(EnumerableExtensions));
             PrintOutClassMethods("[Enum extentions](https://github.com/halcharger/NExtensions/wiki/Enum-extensions)", typeof(Enums));
             PrintOutClassMethods("[Exception extentions](https://github.com/halcharger/NExtensions/wiki/Exception-extensions)", typeof(ExceptionExtensions));
