@@ -116,6 +116,31 @@ namespace Tests
             Dates.SundayDate.IsWeekend().Should().BeTrue();
         }
 
+        [Test]
+        public void IsFirstDayOfMonth()
+        {
+            Dates.FirstDayOfMonth.IsFirstDayOfMonth().Should().BeTrue();
+            Dates.FirstDayOfMonth.AddDays(1).IsFirstDayOfMonth().Should().BeFalse();
+        }
+
+        [Test]
+        public void IsLastDayOfMonth()
+        {
+            Dates.LastDayOfMonth.IsLastDayOfMonth().Should().BeTrue();
+            Dates.LastDayOfMonth.AddDays(-1).IsLastDayOfMonth().Should().BeFalse();
+        }
+
+        [Test]
+        public void LastDayOfMonth_ReturnsLastDayOfMonthDateTime()
+        {
+            Dates.FirstDayOfMonth.LastDayOfMonth().Should().Be(Dates.LastDayOfMonth);
+        }
+
+        [Test]
+        public void FirstDayOfMonth_ReturnsFirstDayOfMonthDateTime()
+        {
+            Dates.LastDayOfMonth.FirstDayOfMonth().Should().Be(Dates.FirstDayOfMonth);
+        }
     }
 
     public static class Dates
@@ -127,5 +152,8 @@ namespace Tests
         public static DateTime FridayDate { get { return new DateTime(2014, 4, 11); } }
         public static DateTime SaturdayDate { get { return new DateTime(2014, 4, 12); } }
         public static DateTime SundayDate { get { return new DateTime(2014, 4, 13); } }
+
+        public static DateTime FirstDayOfMonth { get { return new DateTime(2014, 1, 1);} }
+        public static DateTime LastDayOfMonth { get { return new DateTime(2014, 1, 31);} }
     }
 }

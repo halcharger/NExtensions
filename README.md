@@ -28,7 +28,10 @@ Extensions Summary
 
 #####[DateTime extentions](https://github.com/halcharger/NExtensions/wiki/DateTime-extensions)
 
+* FirstDayOfMonth
+* IsFirstDayOfMonth
 * IsFriday
+* IsLastDayOfMonth
 * IsMonday
 * IsSaturday
 * IsSunday
@@ -37,6 +40,7 @@ Extensions Summary
 * IsWednesday
 * IsWeekday
 * IsWeekend
+* LastDayOfMonth
 
 #####[Enumerable extentions](https://github.com/halcharger/NExtensions/wiki/Enumerable-extensions)
 

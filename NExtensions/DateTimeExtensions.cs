@@ -48,5 +48,25 @@ namespace NExtensions
         {
             return input.DayOfWeek == DayOfWeek.Sunday;
         }
+
+        public static DateTime LastDayOfMonth(this DateTime input)
+        {
+            return input.FirstDayOfMonth().AddMonths(1).AddDays(-1);
+        }
+
+        public static DateTime FirstDayOfMonth(this DateTime input)
+        {
+            return new DateTime(input.Year, input.Month, 1);
+        }
+
+        public static bool IsLastDayOfMonth(this DateTime input)
+        {
+            return input.Date == input.LastDayOfMonth();
+        }
+
+        public static bool IsFirstDayOfMonth(this DateTime input)
+        {
+            return input.Day == 1;
+        }
     }
 }
