@@ -42,6 +42,11 @@ namespace NExtensions
             return !input.IsNullOrEmpty();
         }
 
+        public static string Copy(this string input)
+        {
+            return string.Copy(input);
+        }
+
         public static string FormatWith(this string format, params object[] args)
         {
             return string.Format(format, args);

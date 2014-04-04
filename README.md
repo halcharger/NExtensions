@@ -81,6 +81,7 @@ Extensions Summary
 * AppendNewLine
 * ContainsAll
 * ContainsAny
+* Copy
 * FormatWith
 * HasValue
 * IsNullOrEmpty
@@ -97,6 +98,14 @@ Extensions Summary
 * ToBoolean
 * ToDecimal
 * ToInteger
+
+#####[Type extentions](https://github.com/halcharger/NExtensions/wiki/Type-extensions)
+
+* CreateInstance
+* IsIEnumerable
+* IsIList
+* IsString
+* IsType
 
 Detailed Usage
 --------------

@@ -22,6 +22,7 @@ namespace Tests
             PrintOutClassMethods("[Numeric extentions](https://github.com/halcharger/NExtensions/wiki/Numeric-extensions)", typeof(NumericExtensions));
             PrintOutClassMethods("[Object extentions](https://github.com/halcharger/NExtensions/wiki/Object-extensions)", typeof(ObjectExtensions));
             PrintOutClassMethods("[String extentions](https://github.com/halcharger/NExtensions/wiki/String-extensions)", typeof(StringExtensions));
+            PrintOutClassMethods("[Type extentions](https://github.com/halcharger/NExtensions/wiki/Type-extensions)", typeof(TypeExtensions));
         }
 
         private void PrintOutClassMethods(string heading, Type classType)

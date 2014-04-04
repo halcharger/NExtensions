@@ -48,18 +48,17 @@ namespace NExtensions
             foreach (var p in source.GetProperties())
                 if (p.PropertyType.IsPrimitive || 
                     p.PropertyType.IsValueType ||
-                    p.PropertyType == typeof(Type))
+                    p.PropertyType.IsType())
                 {
                     //basic framework types or structs
                     p.SetValue(clone, p.GetValue(source));
                 }
-                else if (p.PropertyType == typeof (string))
+                else if (p.PropertyType.IsString())
                 {
                     //strings, we don't want a ref to the string value, we want a copy
-                    var newStringVal = (string)p.GetValue(source);
-                    p.SetValue(clone, string.Copy(newStringVal));
+                    p.SetValue(clone, p.GetValue(source).ToNullSafeString().Copy());
                 }
-                else if (typeof(IEnumerable).IsAssignableFrom(p.PropertyType))
+                else if (p.PropertyType.IsIEnumerable())
                 {
                     if (p.PropertyType.IsArray)
                     {
@@ -70,12 +69,12 @@ namespace NExtensions
                             p.SetValue(clone, newArray);
                         }
                     }
-                    else if (typeof (IList).IsAssignableFrom(p.PropertyType))
+                    else if (p.PropertyType.IsIList())
                     {
                         var sourceList = (IList)p.GetValue(source);
                         if (sourceList != null)
                         {
-                            var newList = CopyListvalues((IList)Activator.CreateInstance(p.PropertyType), sourceList);
+                            var newList = CopyListvalues(p.PropertyType.CreateInstance<IList>(), sourceList);
                             p.SetValue(clone, newList);
                         }
                     }
@@ -83,7 +82,7 @@ namespace NExtensions
                 else if (p.PropertyType.IsClass)
                 {
                     //complex types (classes)
-                    p.SetValue(clone, Activator.CreateInstance(p.PropertyType));
+                    p.SetValue(clone, p.PropertyType.CreateInstance());
                     RecursivelySetPropertyValues(p.GetValue(clone), p.GetValue(source));
                 }
         }
@@ -96,14 +95,14 @@ namespace NExtensions
                 var type = item.GetType();
                 if (type.IsPrimitive ||
                     type.IsValueType ||
-                    type == typeof(Type))
+                    type.IsType())
                 {
                     input.SetValue(item, i);
                 }
-                else if (type == typeof(string))
+                else if (type.IsString())
                 {
                     //strings, we don't want a ref to the string value, we want a copy
-                    input.SetValue(string.Copy((string)item), i);
+                    input.SetValue(item.ToNullSafeString().Copy(), i);
                 }
                 else if (type.IsClass)
                 {
@@ -122,14 +121,14 @@ namespace NExtensions
                 var type = item.GetType();
                 if (type.IsPrimitive ||
                     type.IsValueType ||
-                    type == typeof (Type))
+                    type.IsType())
                 {
                     input.Add(item);
                 }
-                else if (type == typeof (string))
+                else if (type.IsString())
                 {
                     //strings, we don't want a ref to the string value, we want a copy
-                    input.Add(string.Copy((string)item));
+                    input.Add(item.ToNullSafeString().Copy());
                 }
                 else if (type.IsClass)
                 {
