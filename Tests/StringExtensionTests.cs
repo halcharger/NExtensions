@@ -72,10 +72,28 @@ namespace Tests
             "1 {0} 2 {1}".FormatWith("one", "two").Should().Be("1 one 2 two");
         }
 
-        [Test]
-        public void Append_AddsTwoStringsTogether()
+        [TestCase("one", "two", 3, "onetwotwotwo")]
+        [TestCase("one", "two", 2, "onetwotwo")]
+        [TestCase("one", "two", 1, "onetwo")]
+        [TestCase("one", "two", 0, "one")]//non sensical but possible
+        public void Append_AddsTwoStringsTogether(string input, string value, int times, string output)
         {
-            "one".Append("two").Should().Be("onetwo");
+            input.Append(value, times).Should().Be(output);
+        }
+
+        [TestCase("one", "two,three,four", "onetwothreefour")]
+        public void Append_AddsStringArrayToInput(string input, string stringArray, string output)
+        {
+            input.Append(stringArray.SplitByComma()).Should().Be(output);
+        }
+
+        public void AppendNewLine_AddsSpecifiedNumberOfNewlines()
+        {
+            var input = "one";
+
+            input.AppendNewLine().Should().Be("one\r\n");
+
+            input.AppendNewLine(2).Should().Be("one\r\n\r\n");
         }
 
         [Test]

@@ -75,11 +75,31 @@ namespace NExtensions
             return values.JoinWith(Environment.NewLine);
         }
 
-        public static string Append(this string value, string valueToAppend)
+        public static string Append(this string input, string value, int times  = 1)
         {
-            if (value == null) return value;
+            if (input == null || times == 0) return input;
 
-            return string.Concat(value, valueToAppend);
+            var newValue = value;
+
+            if (times > 1)
+                Enumerable.Range(1, times-1).ForEach(i => newValue = newValue.Append(value));
+
+            return string.Concat(input, newValue);
+        }
+
+        public static string Append(this string input, IEnumerable<string> values)
+        {
+            return input.Append(values.ToArray());
+        }
+
+        public static string Append(this string input, params string[] values)
+        {
+            return input.Append(values.JoinWith(string.Empty));
+        }
+
+        public static string AppendNewLine(this string input, int times = 1)
+        {
+            return input.Append(Environment.NewLine, times);
         }
 
         public static string Remove(this string input, params string[] toRemove)
@@ -192,8 +212,6 @@ namespace NExtensions
 
             return (int) Convert.ToDecimal(s);
         }
-
-
     }
 
     [Flags]

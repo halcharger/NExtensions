@@ -54,6 +54,7 @@ Extensions Summary
 #####[String extentions](https://github.com/halcharger/NExtensions/wiki/String-extensions)
 
 * Append
+* AppendNewLine
 * ContainsAll
 * ContainsAny
 * FormatWith
