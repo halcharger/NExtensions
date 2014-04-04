@@ -141,6 +141,18 @@ namespace Tests
         {
             Dates.LastDayOfMonth.FirstDayOfMonth().Should().Be(Dates.FirstDayOfMonth);
         }
+
+        [Test]
+        public void AddWeekDays_ShouldWork()
+        {
+            //Monday
+            var date = new DateTime(2014, 4, 7);
+
+            date.AddWeekDays(3).Should().Be(new DateTime(2014, 4, 10));//Thur
+            date.AddWeekDays(6).Should().Be(new DateTime(2014, 4, 15));//Tue
+            date.AddWeekDays(10).Should().Be(new DateTime(2014, 4, 21));//Mon
+            date.AddWeekDays(15).Should().Be(new DateTime(2014, 4, 28));//Mon
+        }
     }
 
     public static class Dates

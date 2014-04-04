@@ -68,5 +68,20 @@ namespace NExtensions
         {
             return input.Day == 1;
         }
+
+        public static DateTime AddWeekDays(this DateTime date, int weekDays)
+        {
+            var direction = weekDays < 0 ? -1 : 1;
+            var newDate = date;
+            while (weekDays != 0)
+            {
+                newDate = newDate.AddDays(direction);
+                if (newDate.IsWeekday())
+                {
+                    weekDays -= direction;
+                }
+            }
+            return newDate;
+        }
     }
 }

@@ -28,6 +28,7 @@ Extensions Summary
 
 #####[DateTime extentions](https://github.com/halcharger/NExtensions/wiki/DateTime-extensions)
 
+* AddWeekDays
 * FirstDayOfMonth
 * IsFirstDayOfMonth
 * IsFriday
