@@ -51,6 +51,10 @@ Extensions Summary
 
 * Absolute
 
+#####[Object extentions](https://github.com/halcharger/NExtensions/wiki/Object-extensions)
+
+* ToNullSafeString
+
 #####[String extentions](https://github.com/halcharger/NExtensions/wiki/String-extensions)
 
 * Append
