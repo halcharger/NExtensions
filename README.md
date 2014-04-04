@@ -50,6 +50,7 @@ Extensions Summary
 * EmptyIfNull
 * ForEach
 * GetDuplicates
+* HasValues
 * IsNullOrEmpty
 * None
 * ToEnumerable
@@ -70,6 +71,8 @@ Extensions Summary
 
 #####[Object extentions](https://github.com/halcharger/NExtensions/wiki/Object-extensions)
 
+* Clone
+* GetProperties
 * ToNullSafeString
 
 #####[String extentions](https://github.com/halcharger/NExtensions/wiki/String-extensions)

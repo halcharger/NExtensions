@@ -48,23 +48,32 @@ namespace NExtensions
             return collection == null || collection.None();
         }
 
+        public static bool HasValues<T>(this IEnumerable<T> enumerable)
+        {
+            return !enumerable.IsNullOrEmpty();
+        }
+
         public static bool ContainsAll<T>(this IEnumerable<T> collection, IEnumerable<T> otherCollection)
         {
+            if (collection == null) return false;
             return collection.ContainsAll(otherCollection.ToArray());
         }
 
         public static bool ContainsAll<T>(this IEnumerable<T> collection, params T[] otherCollection)
         {
+            if (collection == null) return false;
             return otherCollection.All(collection.Contains);
         }
 
         public static bool ContainsNone<T>(this IEnumerable<T> collection, IEnumerable<T> otherCollection)
         {
+            if (otherCollection == null) return true;
             return collection.ContainsNone(otherCollection.ToArray());
         }
 
         public static bool ContainsNone<T>(this IEnumerable<T> collection, params T[] otherCollection)
         {
+            if (collection == null) return false;
             return otherCollection.None(collection.Contains);
         }
 
