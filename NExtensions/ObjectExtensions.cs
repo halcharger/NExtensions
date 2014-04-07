@@ -28,8 +28,10 @@ namespace NExtensions
         public static T Clone<T>(this T source) where T : class, new()
         {
             if (source == null) return null;
+            if (source is ValueType) return source;
+            if (source is ICloneable) return (T) ((ICloneable) source).Clone();
 
-            var clone = (T)Activator.CreateInstance(source.GetType());
+            var clone = source.GetType().CreateInstance<T>();
 
             clone.RecursivelySetPropertyValues(source);
 
