@@ -66,6 +66,76 @@ namespace Tests
             clone.Should().NotBe(source);//ref check
         }
 
+        [Test]
+        public void GetValueForProperty_works()
+        {
+            var obj = new CloneClass(1, "string1", DateTime.Now, true, 1.1M, typeof(CloneClass));
+
+            obj.GetValueForProperty("TheInt").Should().Be(obj.TheInt);
+            obj.GetValueForProperty("TheString").Should().Be(obj.TheString);
+            obj.GetValueForProperty("TheDateTime").Should().Be(obj.TheDateTime);
+            obj.GetValueForProperty("TheBool").Should().Be(obj.TheBool);
+            obj.GetValueForProperty("TheDecimal").Should().Be(obj.TheDecimal);
+            obj.GetValueForProperty("TheType").Should().Be(obj.TheType);
+        }
+
+        [Test]
+        public void GetValueForProperty_returns_defaultValue_when_property_doesnt_exist()
+        {
+            var obj = new CloneClass();
+
+            obj.GetValueForProperty("NonExistantProperty").Should().BeNull();
+            obj.GetValueForProperty("NonExistantProperty", "doesnt exist").Should().Be("doesnt exist");
+        }
+
+        [Test]
+        public void GetValueForPropert_IsNullSafe()
+        {
+            CloneClass obj = null;
+
+            obj.GetValueForProperty("TheInt").Should().BeNull();
+        }
+
+        [Test]
+        public void SetValueForProperty_IsNullSafe()
+        {
+            CloneClass obj = null;
+
+            obj.SetValueForProperty("TheInt", 1);
+
+            obj.Should().BeNull();
+        }
+
+        [Test]
+        public void SetValueForProperty_Returns_WhenTryingToSetPropertyThatDoesntExist()
+        {
+            var obj = new CloneClass();
+
+            obj.SetValueForProperty("NonExistantProperty", "boom");
+        }
+
+        [Test]
+        public void SetValueForProperty_works()
+        {
+            var obj = new CloneClass();
+            var date = DateTime.Now;
+
+            obj.SetValueForProperty("TheInt", 1);
+            obj.SetValueForProperty("TheString", "some string");
+            obj.SetValueForProperty("TheDateTime", date);
+            obj.SetValueForProperty("TheBool", true);
+            obj.SetValueForProperty("TheDecimal", 1.1M);
+            obj.SetValueForProperty("TheType", typeof(CloneClass));
+
+            obj.TheInt.Should().Be(1);
+            obj.TheString.Should().Be("some string");
+            obj.TheDateTime.Should().Be(date);
+            obj.TheBool.Should().Be(true);
+            obj.TheDecimal.Should().Be(1.1M);
+            obj.TheType.Should().Be(typeof(CloneClass));
+
+        }
+
         private void AssertCloneProperties(CloneClass clone, CloneClass source)
         {
             ReferenceEquals(clone, source).Should().BeFalse();

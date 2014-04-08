@@ -43,6 +43,26 @@ namespace NExtensions
             return input.GetType().GetProperties();
         }
 
+        public static object GetValueForProperty(this object input, string propertyName, object defaultValue = null)
+        {
+            if (input == null) return null;
+
+            var propInfo = input.GetType().GetProperty(propertyName);
+
+            return propInfo == null ? defaultValue : propInfo.GetValue(input);
+        }
+
+        public static void SetValueForProperty(this object input, string propertyName, object value)
+        {
+            if (input == null) return;
+
+            var propInfo = input.GetType().GetProperty(propertyName);
+
+            if (propInfo == null) return;
+
+            propInfo.SetValue(input, value);
+        }
+
         private static void RecursivelySetPropertyValues<T>(this T clone, T source) where T : class
         {
             if (clone == null || source == null) return;

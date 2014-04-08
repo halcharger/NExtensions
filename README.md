@@ -73,6 +73,8 @@ Extensions Summary
 
 * Clone
 * GetProperties
+* GetValueForProperty
+* SetValueForProperty
 * ToNullSafeString
 
 #####[String extentions](https://github.com/halcharger/NExtensions/wiki/String-extensions)
