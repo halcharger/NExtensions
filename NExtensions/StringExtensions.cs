@@ -44,6 +44,7 @@ namespace NExtensions
 
         public static string Copy(this string input)
         {
+            if (input == null) return null;
             return string.Copy(input);
         }
 

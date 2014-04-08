@@ -68,8 +68,7 @@ namespace NExtensions
             if (clone == null || source == null) return;
 
             foreach (var p in source.GetProperties())
-                if (p.PropertyType.IsPrimitive || 
-                    p.PropertyType.IsValueType ||
+                if (p.PropertyType.IsValueType ||
                     p.PropertyType.IsType())
                 {
                     //basic framework types or structs
@@ -78,7 +77,7 @@ namespace NExtensions
                 else if (p.PropertyType.IsString())
                 {
                     //strings, we don't want a ref to the string value, we want a copy
-                    p.SetValue(clone, p.GetValue(source).ToNullSafeString().Copy());
+                    p.SetValue(clone, p.GetValue(source).ToNullSafeString(null).Copy());
                 }
                 else if (p.PropertyType.IsIEnumerable())
                 {
@@ -115,8 +114,7 @@ namespace NExtensions
             {
                 var item = source.GetValue(i);
                 var type = item.GetType();
-                if (type.IsPrimitive ||
-                    type.IsValueType ||
+                if (type.IsValueType ||
                     type.IsType())
                 {
                     input.SetValue(item, i);
@@ -141,8 +139,7 @@ namespace NExtensions
             foreach (var item in source)
             {
                 var type = item.GetType();
-                if (type.IsPrimitive ||
-                    type.IsValueType ||
+                if (type.IsValueType ||
                     type.IsType())
                 {
                     input.Add(item);

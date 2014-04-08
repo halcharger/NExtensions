@@ -34,19 +34,42 @@ namespace Tests
         }
 
         [Test]
-        public void Clone_ShouldDeepCopyObject()
+        public void Clone_ShouldDeepCopyNonEnumerableProperties()
         {
             var source = new CloneClass(1, "name1", Dates.MondayDate, true, 1.1M, typeof(string))
             {
-                TheIntsArray = new[]{1, 2, 3, 4, 5},
-                TheIntsList = new List<int>{2, 3, 4, 5, 6},
                 TheStruct = new StructObj(2, "name2", Dates.TuesdayDate, false, 2.2M, typeof(decimal)),
+                Child = new CloneClass(3, "name3", Dates.WednesdayDate, false, 3.3M, typeof(bool))
+                {
+                    TheStruct = new StructObj(4, "name4", Dates.ThursdayDate, true, 4.4M, typeof(CloneClass))
+                }
+            };
+
+            var clone = source.Clone();
+
+            AssertCloneProperties(clone, source);
+            AssertStructProperties(clone.TheStruct, source.TheStruct);
+
+            clone.Child.Should().NotBeNull();
+            AssertCloneProperties(clone.Child, source.Child);
+            AssertStructProperties(clone.Child.TheStruct, source.Child.TheStruct);
+
+            clone.Should().NotBe(source);//ref check
+        }
+
+        [Test]
+        public void Clone_ShouldDeepCopyEnumerableProperties()
+        {
+            var source = new CloneClass
+            {
+                TheIntsArray = new[] { 1, 2, 3, 4, 5 },
+                TheIntsList = new List<int> { 2, 3, 4, 5, 6 },
                 TheCloneClassList = new List<CloneClass>
                 {
                     new CloneClass(5, "name5", Dates.FridayDate, true, 5.5M, typeof(StructObj)), 
                     new CloneClass(6, "name6", Dates.SaturdayDate, false, 5.5M, typeof(DateTime))
                 },
-                Child = new CloneClass(3, "name3", Dates.WednesdayDate, false, 3.3M, typeof(bool))
+                Child = new CloneClass
                 {
                     TheIntsArray = new[] { 5, 4, 3, 2, 1 },
                     TheIntsList = new List<int> { 6, 5, 4, 3, 2 },
@@ -143,7 +166,8 @@ namespace Tests
             clone.TheInt.Should().Be(source.TheInt);
 
             clone.TheString.Should().Be(source.TheString);
-            ReferenceEquals(clone.TheString, source.TheString).Should().BeFalse();
+            if (clone.TheString != null || source.TheString != null)
+                ReferenceEquals(clone.TheString, source.TheString).Should().BeFalse();
 
             clone.TheDateTime.Should().Be(source.TheDateTime);
             clone.TheDecimal.Should().Be(source.TheDecimal);
