@@ -104,8 +104,16 @@ Extensions Summary
 #####[Type extentions](https://github.com/halcharger/NExtensions/wiki/Type-extensions)
 
 * CreateInstance
+* IsBool
+* IsDateTime
+* IsDecimal
 * IsIEnumerable
 * IsIList
+* IsInt
+* IsNullableBool
+* IsNullableDateTime
+* IsNullableDecimal
+* IsNullableInt
 * IsString
 * IsType
 

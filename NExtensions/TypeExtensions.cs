@@ -10,6 +10,46 @@ namespace NExtensions
             return input == typeof (string);
         }
 
+        public static bool IsDecimal(this Type input)
+        {
+            return input == typeof(decimal);
+        }
+
+        public static bool IsInt(this Type input)
+        {
+            return input == typeof(int);
+        }
+
+        public static bool IsDateTime(this Type input)
+        {
+            return input == typeof(DateTime);
+        }
+
+        public static bool IsBool(this Type input)
+        {
+            return input == typeof(bool);
+        }
+
+        public static bool IsNullableDecimal(this Type input)
+        {
+            return input == typeof(decimal?);
+        }
+
+        public static bool IsNullableInt(this Type input)
+        {
+            return input == typeof(int?);
+        }
+
+        public static bool IsNullableDateTime(this Type input)
+        {
+            return input == typeof(DateTime?);
+        }
+
+        public static bool IsNullableBool(this Type input)
+        {
+            return input == typeof(bool?);
+        }
+
         public static bool IsType(this Type input)
         {
             return input == typeof (Type);
