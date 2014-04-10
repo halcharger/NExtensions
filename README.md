@@ -8,7 +8,10 @@ About
 
 NExtensions is a zero-dependency lightweight library containing small simple yet indispensable extension methods for .NET framework base types. These extension methods make your code more concise, more readable and more fluent.
 
-The currenct status on the build server is: [![Build status](https://ci.appveyor.com/api/projects/status/u1m5x7f4iyeg8p60)](https://ci.appveyor.com/project/halcharger/nextensions)
+CI build status 
+---------------
+
+[![Build status](https://ci.appveyor.com/api/projects/status/u1m5x7f4iyeg8p60)](https://ci.appveyor.com/project/halcharger/nextensions)
 
 Install
 -------
