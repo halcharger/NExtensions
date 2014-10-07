@@ -63,6 +63,12 @@ namespace NExtensions
             propInfo.SetValue(input, value);
         }
 
+        public static void ThrowIfNull(this object input, string paramName)
+        {
+            if (input == null)
+                throw new ArgumentNullException(paramName);
+        }
+
         private static void RecursivelySetPropertyValues<T>(this T clone, T source) where T : class
         {
             if (clone == null || source == null) return;
