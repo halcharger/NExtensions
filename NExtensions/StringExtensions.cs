@@ -232,6 +232,12 @@ namespace NExtensions
             return Encoding.UTF8.GetString(base64EncodedBytes);
         }
 
+        public static void ThrowIfNullOrEmpty(this string input, string paramName)
+        {
+            if (input.IsNullOrEmpty())
+                throw new ArgumentException("Argument '{0}' is null or empty and shouldn't be.".FormatWith(paramName), paramName);
+        }
+
     }
 
     [Flags]
