@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace NExtensions
 {
@@ -236,6 +237,12 @@ namespace NExtensions
         {
             if (input.IsNullOrEmpty())
                 throw new ArgumentException("Argument '{0}' is null or empty and shouldn't be.".FormatWith(paramName), paramName);
+        }
+
+        public static bool IsEmailAddress(this string input)
+        {
+            var match = Regex.Match(input, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
+            return match.Success;
         }
 
     }
