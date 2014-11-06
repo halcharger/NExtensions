@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -243,6 +244,17 @@ namespace NExtensions
         {
             var match = Regex.Match(input, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
             return match.Success;
+        }
+
+        public static string Hash(this string input)
+        {
+            HashAlgorithm hashAlgorithm = new SHA256CryptoServiceProvider();
+
+            var byteValue = Encoding.UTF8.GetBytes(input);
+
+            var byteHash = hashAlgorithm.ComputeHash(byteValue);
+
+            return Convert.ToBase64String(byteHash);
         }
 
     }
