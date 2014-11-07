@@ -246,7 +246,7 @@ namespace NExtensions
             return match.Success;
         }
 
-        public static string Hash(this string input)
+        public static string Hash(this string input, HashOptions options = null)
         {
             HashAlgorithm hashAlgorithm = new SHA256CryptoServiceProvider();
 
@@ -254,7 +254,14 @@ namespace NExtensions
 
             var byteHash = hashAlgorithm.ComputeHash(byteValue);
 
-            return Convert.ToBase64String(byteHash);
+            var hashValue = Convert.ToBase64String(byteHash);
+
+            if (options != null)
+            {
+                hashValue = options.CharsToReplace.Aggregate(hashValue, (current, charToReplaceOption) => current.Replace(charToReplaceOption.Key, charToReplaceOption.Value));
+            }
+
+            return hashValue;
         }
 
     }
