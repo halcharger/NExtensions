@@ -69,6 +69,18 @@ namespace NExtensions
                 throw new ArgumentNullException(paramName);
         }
 
+        public static bool NotNull(this object input)
+        {
+            return !input.IsNull();
+        }
+
+        public static bool IsNull(this object input)
+        {
+            return input == null;
+        }
+
+
+
         private static void RecursivelySetPropertyValues<T>(this T clone, T source) where T : class
         {
             if (clone == null || source == null) return;

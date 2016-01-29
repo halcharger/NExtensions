@@ -23,6 +23,14 @@ namespace Tests
         }
 
         [Test]
+        public void Foreach_IsNullSafe()
+        {
+            IEnumerable<string> strings = null;
+
+            strings.ForEach(Console.WriteLine);
+        }
+
+        [Test]
         public void None_IsNullSafe()
         {
             IEnumerable<string> strings = null;

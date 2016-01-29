@@ -159,6 +159,38 @@ namespace Tests
 
         }
 
+        [Test]
+        public void NotNullReturnsTrueWhenNotNull()
+        {
+            var obj = new object();
+
+            obj.NotNull().Should().BeTrue();
+        }
+
+        [Test]
+        public void NotNullReturnsFalseWhenNull()
+        {
+            object obj = null;
+
+            obj.NotNull().Should().BeFalse();
+        }
+
+        [Test]
+        public void IsNullReturnsFalseWhenNotNull()
+        {
+            var obj = new object();
+
+            obj.IsNull().Should().BeFalse();
+        }
+
+        [Test]
+        public void IsNullReturnsTrueWhenNull()
+        {
+            object obj = null;
+
+            obj.IsNull().Should().BeTrue();
+        }
+
         private void AssertCloneProperties(CloneClass clone, CloneClass source)
         {
             ReferenceEquals(clone, source).Should().BeFalse();
