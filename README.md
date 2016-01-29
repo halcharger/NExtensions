@@ -81,6 +81,8 @@ Extensions Summary
 * GetValueForProperty
 * SetValueForProperty
 * ToNullSafeString
+* IsNull
+* NotNull
 
 #####[String extentions](https://github.com/halcharger/NExtensions/wiki/String-extensions)
 
