@@ -117,6 +117,11 @@ namespace NExtensions
             return input;
         }
 
+        public static string RemoveSpaces(this string input)
+        {
+            return input.Remove(" ");
+        }
+
         public static bool ContainsAny(this string input, params string[] contains)
         {
             if (input == null) return false;
