@@ -53,5 +53,18 @@ namespace NExtensions
 
             throw new ArgumentException("Cannot find enum value '{0}' for type {1}".FormatWith(input ?? "<NULL>", typeof(T).Name));
         }
+
+        public static T ToEnum<T>(int intValue) where T : struct, IConvertible
+        {
+            if (!typeof(T).IsEnum) throw new Exception("T must be an Enumeration type.");
+
+            var val = ((T[])Enum.GetValues(typeof(T)))[0];
+
+            foreach (var enumValue in (T[])Enum.GetValues(typeof(T)))
+                if (Convert.ToInt32(enumValue).Equals(intValue))
+                    return enumValue;
+
+            return val;
+        }
     }
 }
