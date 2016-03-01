@@ -66,5 +66,18 @@ namespace NExtensions
 
             return val;
         }
+
+        public static T ToEnum<T>(this long intValue) where T : struct, IConvertible
+        {
+            if (!typeof(T).IsEnum) throw new Exception("T must be an Enumeration type.");
+
+            var val = ((T[])Enum.GetValues(typeof(T)))[0];
+
+            foreach (var enumValue in (T[])Enum.GetValues(typeof(T)))
+                if (Convert.ToInt64(enumValue).Equals(intValue))
+                    return enumValue;
+
+            return val;
+        }
     }
 }
