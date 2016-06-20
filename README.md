@@ -83,6 +83,7 @@ Extensions Summary
 * ToNullSafeString
 * IsNull
 * NotNull
+* ToTask
 
 #####[String extentions](https://github.com/halcharger/NExtensions/wiki/String-extensions)
 

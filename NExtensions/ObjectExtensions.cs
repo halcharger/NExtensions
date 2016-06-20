@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace NExtensions
 {
@@ -77,6 +78,11 @@ namespace NExtensions
         public static bool IsNull(this object input)
         {
             return input == null;
+        }
+
+        public static Task<T> ToTask<T>(this T input)
+        {
+            return Task.FromResult(input);
         }
 
 

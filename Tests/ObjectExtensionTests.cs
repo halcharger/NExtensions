@@ -191,6 +191,17 @@ namespace Tests
             obj.IsNull().Should().BeTrue();
         }
 
+        [Test]
+        public void ToTakReturnsCompletedTask()
+        {
+            string input = Guid.NewGuid().ToString();
+
+            var completedTask = input.ToTask();
+
+            completedTask.IsCompleted.Should().BeTrue();
+            completedTask.Result.Should().Be(input);
+        }
+
         private void AssertCloneProperties(CloneClass clone, CloneClass source)
         {
             ReferenceEquals(clone, source).Should().BeFalse();
