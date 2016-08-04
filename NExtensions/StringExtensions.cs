@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -269,6 +270,16 @@ namespace NExtensions
             return hashValue;
         }
 
+        public static string TakeCharacters(this string input, int numberOfCharactersToTake)
+        {
+            return input.IsNullOrEmpty() ? input : new string(input.Take(numberOfCharactersToTake).ToArray());
+        }
+
+        public static string ToEllipsis(this string input, int numberOfCharactersToDisplay)
+        {
+            var numberOfCharactersToTake = numberOfCharactersToDisplay - 3;
+            return input.IsNullOrEmpty() ? input : input.Length <= numberOfCharactersToDisplay ? input : new string(input.Take(numberOfCharactersToTake).ToArray()) + "...";
+        }
     }
 
     [Flags]

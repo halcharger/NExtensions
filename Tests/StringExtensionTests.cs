@@ -292,5 +292,31 @@ namespace Tests
             valueToConvert.ToDecimal();
         }
 
+        [TestCase(null, 5, null)]
+        [TestCase("", 5, "")]
+        [TestCase(" ", 5, " ")]
+        [TestCase("12345", 5, "12345")]
+        [TestCase("12345678", 5, "12345")]
+        public void TakeCharacters(string input, int charactersToTake, string expectedOutput)
+        {
+            input.TakeCharacters(charactersToTake).Should().Be(expectedOutput);
+        }
+
+        [TestCase(null, 5, null)]
+        [TestCase("", 5, "")]
+        [TestCase(" ", 5, " ")]
+        [TestCase("12", 5, "12")]
+        [TestCase("123", 5, "123")]
+        [TestCase("1234", 5, "1234")]
+        [TestCase("12345", 5, "12345")]
+        [TestCase("123456", 5, "12...")]
+        [TestCase("1234567", 5, "12...")]
+        [TestCase("12345678", 5, "12...")]
+        [TestCase("123456789", 5, "12...")]
+        public void ToEllipsis(string input, int charactersToTake, string expectedOutput)
+        {
+            input.ToEllipsis(charactersToTake).Should().Be(expectedOutput);
+        }
+
     }
 }
