@@ -280,6 +280,11 @@ namespace NExtensions
             var numberOfCharactersToTake = numberOfCharactersToDisplay - 3;
             return input.IsNullOrEmpty() ? input : input.Length <= numberOfCharactersToDisplay ? input : new string(input.Take(numberOfCharactersToTake).ToArray()) + "...";
         }
+
+        public static byte[] ToByteArray(this string input)
+        {
+            return Encoding.UTF8.GetBytes(input);
+        }
     }
 
     [Flags]
