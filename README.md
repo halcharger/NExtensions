@@ -73,6 +73,8 @@ Extensions Summary
 #####[Numeric extentions](https://github.com/halcharger/NExtensions/wiki/Numeric-extensions)
 
 * Absolute
+* RoundToMoney
+* RoundTo
 
 #####[Object extentions](https://github.com/halcharger/NExtensions/wiki/Object-extensions)
 
