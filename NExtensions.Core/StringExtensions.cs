@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace NExtensions
+namespace NExtensions.Core
 {
     public static class StringExtensions
     {
@@ -45,12 +44,6 @@ namespace NExtensions
             return !input.IsNullOrEmpty();
         }
 
-        public static string Copy(this string input)
-        {
-            if (input == null) return null;
-            return string.Copy(input);
-        }
-
         public static string FormatWith(this string format, params object[] args)
         {
             return string.Format(format, args);
@@ -84,14 +77,14 @@ namespace NExtensions
             return values.JoinWith(Environment.NewLine);
         }
 
-        public static string Append(this string input, string value, int times  = 1)
+        public static string Append(this string input, string value, int times = 1)
         {
             if (input == null || times == 0) return input;
 
             var newValue = value;
 
             if (times > 1)
-                Enumerable.Range(1, times-1).ForEach(i => newValue = newValue.Append(value));
+                Enumerable.Range(1, times - 1).ForEach(i => newValue = newValue.Append(value));
 
             return string.Concat(input, newValue);
         }
@@ -224,7 +217,7 @@ namespace NExtensions
 
             if (s == "-") return 0;
 
-            return (int) Convert.ToDecimal(s);
+            return (int)Convert.ToDecimal(s);
         }
 
         public static string Base64Encode(this string plainText)
@@ -251,24 +244,6 @@ namespace NExtensions
             return match.Success;
         }
 
-        public static string Hash(this string input, HashOptions options = null)
-        {
-            HashAlgorithm hashAlgorithm = new SHA256CryptoServiceProvider();
-
-            var byteValue = Encoding.UTF8.GetBytes(input);
-
-            var byteHash = hashAlgorithm.ComputeHash(byteValue);
-
-            var hashValue = Convert.ToBase64String(byteHash);
-
-            if (options != null)
-            {
-                hashValue = options.CharsToReplace.Aggregate(hashValue, (current, charToReplaceOption) => current.Replace(charToReplaceOption.Key, charToReplaceOption.Value));
-            }
-
-            return hashValue;
-        }
-
         public static string TakeCharacters(this string input, int numberOfCharactersToTake)
         {
             return input.IsNullOrEmpty() ? input : new string(input.Take(numberOfCharactersToTake).ToArray());
@@ -289,16 +264,16 @@ namespace NExtensions
     [Flags]
     public enum StringJoinOptions
     {
-        None = 0, 
+        None = 0,
         AddSpaceSuffix = 1
     }
 
     [Flags]
     public enum StringSplitOptions
     {
-        None = 0, 
-        RemoveEmptyEntries = 1, 
-        TrimWhiteSpaceFromEntries = 2, 
+        None = 0,
+        RemoveEmptyEntries = 1,
+        TrimWhiteSpaceFromEntries = 2,
         TrimWhiteSpaceAndRemoveEmptyEntries = 4
     }
 }
