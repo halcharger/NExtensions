@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.5</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>NExtensions</PackageId>
+    <Authors>Halcharger</Authors>
+    <Company>HalCharger</Company>
+    <Product>NExtensions</Product>
+    <Description>NExtensions is a zero-dependency lightweight library containing small simple yet indispensable extension methods for .NET framework base types. These extension methods make your code more concise, more readable and more fluent.</Description>
+    <PackageProjectUrl>https://github.com/halcharger/NExtensions</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/halcharger/NExtensions</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <AssemblyVersion>1.0.52.0</AssemblyVersion>
+    <FileVersion>1.0.52.0</FileVersion>
+    <AssemblyName>NExtensions</AssemblyName>
+    <RootNamespace>NExtensions</RootNamespace>
+    <PackageIconUrl>https://raw.githubusercontent.com/halcharger/NExtensions/master/NExtensions/NExtensions.png</PackageIconUrl>
+  </PropertyGroup>
+
+</Project>
