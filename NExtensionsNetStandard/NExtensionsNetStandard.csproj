@@ -11,11 +11,19 @@
     <PackageProjectUrl>https://github.com/halcharger/NExtensions</PackageProjectUrl>
     <RepositoryUrl>https://github.com/halcharger/NExtensions</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <AssemblyVersion>1.0.52.0</AssemblyVersion>
-    <FileVersion>1.0.52.0</FileVersion>
+    <AssemblyVersion>1.0.53.0</AssemblyVersion>
+    <FileVersion>1.0.53.0</FileVersion>
     <AssemblyName>NExtensions</AssemblyName>
     <RootNamespace>NExtensions</RootNamespace>
     <PackageIconUrl>https://raw.githubusercontent.com/halcharger/NExtensions/master/NExtensions/NExtensions.png</PackageIconUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard1.5\NExtensions.xml</DocumentationFile>
   </PropertyGroup>
 
 </Project>
