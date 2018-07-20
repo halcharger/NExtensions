@@ -1,6 +1,10 @@
 NExtensions
 ===========
 
+[![NuGet](https://img.shields.io/nuget/dt/nextensions.svg?style=plastic)](codestream.logdna) 
+[![NuGet](https://img.shields.io/nuget/v/nextensions.svg?style=plastic)](codestream.logdna)
+
+
 Adding .NET framework extension methods to basic types that you thought would have been there but aren't
 
 About
@@ -24,9 +28,9 @@ From the **Package Manager Console** in Visual Studio simply run
 
 The symbols have also been pushed along with the nuget package so you should be able to step into the source if your Visual Studio is configured correctly. To configure your Visual Studio go to **Debug > Options and Settings** and make the following changes:
 
-* Under General, turn **off** “Enable Just My Code”
-* Under General, turn **on** “Enable source server support”. You may have to Ok a security warning.
-* Under Symbols, add “http://srv.symbolsource.org/pdb/Public” to the list. 
+* Under General, turn **off** ï¿½Enable Just My Codeï¿½
+* Under General, turn **on** ï¿½Enable source server supportï¿½. You may have to Ok a security warning.
+* Under Symbols, add ï¿½http://srv.symbolsource.org/pdb/Publicï¿½ to the list. 
 
 Extensions Summary
 ------------------
