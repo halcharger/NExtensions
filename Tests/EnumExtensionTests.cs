@@ -21,12 +21,6 @@ namespace Tests
             TestEnum.ValueOne.GetDescription().Should().Be("ValueOne");
         }
 
-        [Test, ExpectedException(typeof(ArgumentException), ExpectedMessage = "Value must be of Enum type.")]
-        public void Should_ThrowException_WhenTryingToGetDescriptionOfNonEnumType()
-        {
-            new TestStruct().GetDescription();
-        }
-
         [Test]
         public void Should_GetListOfEnumValues()
         {
@@ -53,31 +47,31 @@ namespace Tests
             enumValue.Should().Be(TestEnum.ValueTwo);
         }
 
-        [Test, ExpectedException(typeof(ArgumentException), ExpectedMessage = "Cannot find enum value '<NULL>' for type TestEnum")]
+        [Test]
         public void Should_ThrowArgumentException_WhenGettingEnumValueOfNull()
         {
             string nullString = null;
-            nullString.ToEnum<TestEnum>();
+            
+            Assert.Throws<ArgumentException>(() => nullString.ToEnum<TestEnum>(), "Cannot find enum value '<NULL>' for type TestEnum");
         }
 
-        [Test, ExpectedException(typeof(ArgumentException), ExpectedMessage = "Cannot find enum value 'boom' for type TestEnum")]
+        [Test]
         public void Should_ThrowArgumentException_WhenGettingEnumValueOfBoom()
         {
-            "boom".ToEnum<TestEnum>();
+            Assert.Throws<ArgumentException>(() =>"boom".ToEnum<TestEnum>(), "Cannot find enum value 'boom' for type TestEnum");
         }
-
     }
 
     public enum TestEnum
     {
-        ValueOne, 
+        ValueOne,
+
         [System.ComponentModel.Description("Value Two")]
-        ValueTwo, 
+        ValueTwo,
         ValueThree
     }
 
     public struct TestStruct
     {
-        
     }
 }

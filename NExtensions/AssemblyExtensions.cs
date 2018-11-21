@@ -11,7 +11,8 @@ namespace NExtensions
         // This method courtesy of Phil Haack: http://haacked.com/archive/2012/07/23/get-all-types-in-an-assembly.aspx/
         public static IEnumerable<Type> GetLoadableTypes(this Assembly assembly)
         {
-            if (assembly == null) throw new ArgumentNullException("assembly");
+            assembly.ThrowIfNull(nameof(assembly));
+
             try
             {
                 return assembly.GetTypes();

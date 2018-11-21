@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using FluentAssertions;
 using NExtensions;
@@ -8,16 +9,17 @@ using NUnit.Framework;
 namespace Tests
 {
     [TestFixture]
+    [SuppressMessage("ReSharper", "ExpressionIsAlwaysNull")]
     public class EnumerableExtensionTests
     {
         [Test]
         public void Foreach_ShouldExecuteActionForeachItemInEnumerable()
         {
-            var enumberable = Enumerable.Range(1, 5);
+            var enumerable = Enumerable.Range(1, 5);
             var str = "testing";
-            Action<int> action = i => str = str + i.ToString(); 
+            void Action(int i) => str = str + i.ToString();
 
-            enumberable.ForEach(action);
+            enumerable.ForEach(Action);
 
             str.Should().Be("testing12345");
         }
@@ -27,7 +29,7 @@ namespace Tests
         {
             IEnumerable<string> strings = null;
 
-            strings.ForEach(Console.WriteLine);
+            strings.ForEach(s => Console.WriteLine(s));
         }
 
         [Test]
@@ -41,7 +43,7 @@ namespace Tests
         [Test]
         public void None_ReturnsTrueWhenActuallyIsEmpty()
         {
-            string[] strings = {};
+            string[] strings = { };
 
             strings.None().Should().BeTrue();
         }
@@ -65,7 +67,7 @@ namespace Tests
         [Test]
         public void NoneWithPredicate_ReturnsFalseWhenItemsMeetPredicate()
         {
-            string[] strings = { "one", "two", "three" };
+            string[] strings = {"one", "two", "three"};
 
             strings.None(s => s == "two").Should().BeFalse();
         }
@@ -95,18 +97,18 @@ namespace Tests
         {
             var items = new[]
             {
-                new TestClass(1, "name1"), 
-                new TestClass(2, "name2"), 
-                new TestClass(3, "name3"), 
-                new TestClass(4, "name4"), 
-                new TestClass(5, "name1"), 
-                new TestClass(6, "name2"), 
+                new TestClass(1, "name1"),
+                new TestClass(2, "name2"),
+                new TestClass(3, "name3"),
+                new TestClass(4, "name4"),
+                new TestClass(5, "name1"),
+                new TestClass(6, "name2"),
                 new TestClass(7, "name1")
             };
 
-            var duplicates = items.GetDuplicates(x => x.Name);
+            var duplicates = items.GetDuplicates(x => x.Name).ToSafeEnumeration();
 
-            duplicates.Count().Should().Be(2);
+            duplicates.Length.Should().Be(2);
 
             var name1Duplicates = duplicates.First().ToList();
             name1Duplicates.Count().Should().Be(3);
@@ -118,7 +120,6 @@ namespace Tests
             name2Duplicates.Count().Should().Be(2);
             name2Duplicates[0].Id.Should().Be(2);
             name2Duplicates[1].Id.Should().Be(6);
-
         }
     }
 }

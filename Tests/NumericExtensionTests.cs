@@ -20,6 +20,5 @@ namespace Tests
         {
             input.Absolute().Should().Be(output);
         }
-
     }
 }

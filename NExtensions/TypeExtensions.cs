@@ -135,5 +135,9 @@ namespace NExtensions
             return (T)Activator.CreateInstance(input);
         }
 
+        public static T CreateInstance<T>(this Type input, params object[] args)
+        {
+            return (T) Activator.CreateInstance(input, args);
+        }
     }
 }
