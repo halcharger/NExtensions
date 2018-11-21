@@ -28,7 +28,7 @@ namespace Tests
         [Test]
         public void ToNullSafeString_ShouldReturnInputToStringWhenInputNotNull()
         {
-            var input = new TestClass(1, "name1"){Email = "name1@gmail.com"};
+            var input = new TestClass(1, "name1") {Email = "name1@gmail.com"};
 
             input.ToNullSafeString().Should().Be(input.ToString());
         }
@@ -54,7 +54,7 @@ namespace Tests
             AssertCloneProperties(clone.Child, source.Child);
             AssertStructProperties(clone.Child.TheStruct, source.Child.TheStruct);
 
-            clone.Should().NotBe(source);//ref check
+            clone.Should().NotBe(source); //ref check
         }
 
         [Test]
@@ -62,17 +62,17 @@ namespace Tests
         {
             var source = new CloneClass
             {
-                TheIntsArray = new[] { 1, 2, 3, 4, 5 },
-                TheIntsList = new List<int> { 2, 3, 4, 5, 6 },
+                TheIntsArray = new[] {1, 2, 3, 4, 5},
+                TheIntsList = new List<int> {2, 3, 4, 5, 6},
                 TheCloneClassList = new List<CloneClass>
                 {
-                    new CloneClass(5, "name5", Dates.FridayDate, true, 5.5M, typeof(StructObj)), 
+                    new CloneClass(5, "name5", Dates.FridayDate, true, 5.5M, typeof(StructObj)),
                     new CloneClass(6, "name6", Dates.SaturdayDate, false, 5.5M, typeof(DateTime))
                 },
                 Child = new CloneClass
                 {
-                    TheIntsArray = new[] { 5, 4, 3, 2, 1 },
-                    TheIntsList = new List<int> { 6, 5, 4, 3, 2 },
+                    TheIntsArray = new[] {5, 4, 3, 2, 1},
+                    TheIntsList = new List<int> {6, 5, 4, 3, 2},
                     TheStruct = new StructObj(4, "name4", Dates.ThursdayDate, true, 4.4M, typeof(CloneClass))
                 }
             };
@@ -86,7 +86,7 @@ namespace Tests
             AssertCloneProperties(clone.Child, source.Child);
             AssertStructProperties(clone.Child.TheStruct, source.Child.TheStruct);
 
-            clone.Should().NotBe(source);//ref check
+            clone.Should().NotBe(source); //ref check
         }
 
         [Test]
@@ -156,7 +156,6 @@ namespace Tests
             obj.TheBool.Should().Be(true);
             obj.TheDecimal.Should().Be(1.1M);
             obj.TheType.Should().Be(typeof(CloneClass));
-
         }
 
         [Test]
@@ -210,20 +209,29 @@ namespace Tests
 
             clone.TheString.Should().Be(source.TheString);
             if (clone.TheString != null || source.TheString != null)
+            {
                 ReferenceEquals(clone.TheString, source.TheString).Should().BeFalse();
+            }
 
             clone.TheDateTime.Should().Be(source.TheDateTime);
             clone.TheDecimal.Should().Be(source.TheDecimal);
             clone.TheBool.Should().Be(source.TheBool);
 
             if (clone.TheIntsArray.HasValues() && source.TheIntsArray.HasValues())
+            {
                 clone.TheIntsArray.ContainsAll(source.TheIntsArray).Should().BeTrue();
+            }
+
             if (clone.TheIntsList.HasValues() && source.TheIntsList.HasValues())
-                clone.TheIntsList.ContainsAll(source.TheIntsList).Should().BeTrue();    
+            {
+                clone.TheIntsList.ContainsAll(source.TheIntsList).Should().BeTrue();
+            }
 
             if (clone.TheCloneClassList != null && source.TheCloneClassList != null)
+            {
                 for (int i = 0; i < source.TheCloneClassList.Count; i++)
                     AssertCloneProperties(clone.TheCloneClassList[i], source.TheCloneClassList[i]);
+            }
         }
 
         private void AssertStructProperties(StructObj clone, StructObj source)
@@ -236,13 +244,16 @@ namespace Tests
             clone.TheDecimal.Should().Be(source.TheDecimal);
             clone.TheBool.Should().Be(source.TheBool);
         }
-
     }
 
     public class CloneClass
     {
-        public CloneClass() { }
-        public CloneClass(int theInt, string theString, DateTime theDateTime, bool theBool, decimal theDecimal, Type theType)
+        public CloneClass()
+        {
+        }
+
+        public CloneClass(int theInt, string theString, DateTime theDateTime, bool theBool, decimal theDecimal,
+            Type theType)
         {
             TheInt = theInt;
             TheString = theString;
@@ -268,7 +279,8 @@ namespace Tests
 
     public struct StructObj
     {
-        public StructObj(int theInt, string theString, DateTime theDateTime, bool theBool, decimal theDecimal, Type theType)
+        public StructObj(int theInt, string theString, DateTime theDateTime, bool theBool, decimal theDecimal,
+            Type theType)
         {
             TheInt = theInt;
             TheString = theString;

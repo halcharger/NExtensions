@@ -75,7 +75,8 @@ namespace Tests
         [TestCase("one", "two", 3, "onetwotwotwo")]
         [TestCase("one", "two", 2, "onetwotwo")]
         [TestCase("one", "two", 1, "onetwo")]
-        [TestCase("one", "two", 0, "one")]//non sensical but possible
+        [TestCase("one", "two", 0, "one")]
+        //non sensical but possible
         public void Append_AddsTwoStringsTogether(string input, string value, int times, string output)
         {
             input.Append(value, times).Should().Be(output);
@@ -107,7 +108,7 @@ namespace Tests
         [Test]
         public void JoinWithCommaAndaddedSpace_JoinsStringsWithComma()
         {
-            var strings = new[] { "one", "two", "three" };
+            var strings = new[] {"one", "two", "three"};
 
             strings.JoinWithComma(StringJoinOptions.AddSpaceSuffix).Should().Be("one, two, three");
         }
@@ -115,7 +116,7 @@ namespace Tests
         [Test]
         public void JoinWithSemiColon_JoinsStringsWithSemiColon()
         {
-            var strings = new[] { "one", "two", "three" };
+            var strings = new[] {"one", "two", "three"};
 
             strings.JoinWithSemiColon().Should().Be("one;two;three");
         }
@@ -123,7 +124,7 @@ namespace Tests
         [Test]
         public void JoinWithSemiColonAndAddedSpace_JoinsStringsWithSemiColon()
         {
-            var strings = new[] { "one", "two", "three" };
+            var strings = new[] {"one", "two", "three"};
 
             strings.JoinWithSemiColon(StringJoinOptions.AddSpaceSuffix).Should().Be("one; two; three");
         }
@@ -131,7 +132,7 @@ namespace Tests
         [Test]
         public void JoinWithNewLine_JoinsStringsWithSemiNewLine()
         {
-            var strings = new[] { "one", "two", "three" };
+            var strings = new[] {"one", "two", "three"};
 
             strings.JoinWithNewLine().Should().Be("one\r\ntwo\r\nthree");
         }
@@ -139,7 +140,7 @@ namespace Tests
         [Test]
         public void JoinWithDash_JoinsStringsWithDash()
         {
-            var strings = new[] { "one", "two", "three" };
+            var strings = new[] {"one", "two", "three"};
 
             strings.JoinWith("-").Should().Be("one-two-three");
         }
@@ -222,7 +223,8 @@ namespace Tests
         [Test]
         public void SplitByNewLine_SplitsByNewLine()
         {
-            var value = string.Concat("one", Environment.NewLine, "two ", Environment.NewLine, "three", Environment.NewLine, " ");
+            var value = string.Concat("one", Environment.NewLine, "two ", Environment.NewLine, "three",
+                Environment.NewLine, " ");
             var values = value.SplitByNewLine(StringSplitOptions.TrimWhiteSpaceAndRemoveEmptyEntries).ToArray();
 
             values.Length.Should().Be(3);
@@ -276,20 +278,18 @@ namespace Tests
         [TestCase(",")]
         [TestCase("")]
         [TestCase(" ")]
-        [ExpectedException(typeof(ArgumentException), ExpectedMessage = "Cannot convert empty value to Integer")]
         public void ToInteger_ShouldThrowException(string valueToConvert)
         {
-            valueToConvert.ToInteger();
+            Assert.Throws<ArgumentException>(() => valueToConvert.ToInteger(), "Cannot convert empty value to Integer");
         }
 
         [TestCase(null)]
         [TestCase("()")]
         [TestCase(",")]
         [TestCase("")]
-        [ExpectedException(typeof(ArgumentException))]
         public void ToDecimal_ShouldThrowException(string valueToConvert)
         {
-            valueToConvert.ToDecimal();
+            Assert.Throws<ArgumentException>(() =>valueToConvert.ToDecimal());
         }
 
         [TestCase(null, 5, null)]
@@ -317,6 +317,5 @@ namespace Tests
         {
             input.ToEllipsis(charactersToTake).Should().Be(expectedOutput);
         }
-
     }
 }

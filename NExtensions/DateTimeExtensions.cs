@@ -81,6 +81,7 @@ namespace NExtensions
                     weekDays -= direction;
                 }
             }
+            
             return newDate;
         }
     }

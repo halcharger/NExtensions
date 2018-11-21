@@ -23,6 +23,5 @@ namespace NExtensions
         {
             return Math.Round(val, place);
         }
-
     }
 }

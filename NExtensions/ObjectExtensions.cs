@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -28,9 +29,15 @@ namespace NExtensions
         /// <returns>Returns the cloned object.</returns>
         public static T Clone<T>(this T source) where T : class, new()
         {
-            if (source == null) return null;
-            if (source is ValueType) return source;
-            if (source is ICloneable) return (T) ((ICloneable) source).Clone();
+            switch (source)
+            {
+                case null:
+                    return null;
+                case ValueType _:
+                    return source;
+                case ICloneable cloneable:
+                    return (T) cloneable.Clone();
+            }
 
             var clone = source.GetType().CreateInstance<T>();
 
@@ -46,7 +53,10 @@ namespace NExtensions
 
         public static object GetValueForProperty(this object input, string propertyName, object defaultValue = null)
         {
-            if (input == null) return null;
+            if (input == null)
+            {
+                return null;
+            }
 
             var propInfo = input.GetType().GetProperty(propertyName);
 
@@ -55,19 +65,35 @@ namespace NExtensions
 
         public static void SetValueForProperty(this object input, string propertyName, object value)
         {
-            if (input == null) return;
+            if (input == null)
+            {
+                return;
+            }
 
             var propInfo = input.GetType().GetProperty(propertyName);
 
-            if (propInfo == null) return;
+            if (propInfo == null)
+            {
+                return;
+            }
 
             propInfo.SetValue(input, value);
         }
 
         public static void ThrowIfNull(this object input, string paramName)
         {
-            if (input == null)
-                throw new ArgumentNullException(paramName);
+            input.ThrowIfNull<ArgumentNullException>(paramName);
+        }
+
+        public static void ThrowIfNull<T>(this object input, string message) where T : Exception, new()
+        {
+            if (input.NotNull())
+            {
+                return;
+            }
+
+            var exception = typeof(T).CreateInstance<T>(message);
+            throw exception;
         }
 
         public static bool NotNull(this object input)
@@ -85,11 +111,12 @@ namespace NExtensions
             return Task.FromResult(input);
         }
 
-
-
         private static void RecursivelySetPropertyValues<T>(this T clone, T source) where T : class
         {
-            if (clone == null || source == null) return;
+            if (clone == null || source == null)
+            {
+                return;
+            }
 
             foreach (var p in source.GetProperties())
                 if (p.PropertyType.IsValueType ||
@@ -107,19 +134,22 @@ namespace NExtensions
                 {
                     if (p.PropertyType.IsArray)
                     {
-                        var sourceArray = (Array)p.GetValue(source);
+                        var sourceArray = (Array) p.GetValue(source);
                         if (sourceArray != null)
                         {
-                            var newArray = CopyArrayValues(Array.CreateInstance(p.PropertyType.GetElementType(), sourceArray.Length), sourceArray);
+                            var newArray =
+                                CopyArrayValues(
+                                    Array.CreateInstance(p.PropertyType.GetElementType(), sourceArray.Length),
+                                    sourceArray);
                             p.SetValue(clone, newArray);
                         }
                     }
                     else if (p.PropertyType.IsIList())
                     {
-                        var sourceList = (IList)p.GetValue(source);
+                        var sourceList = (IList) p.GetValue(source);
                         if (sourceList != null)
                         {
-                            var newList = CopyListvalues(p.PropertyType.CreateInstance<IList>(), sourceList);
+                            var newList = CopyListValues(p.PropertyType.CreateInstance<IList>(), sourceList);
                             p.SetValue(clone, newList);
                         }
                     }
@@ -132,52 +162,54 @@ namespace NExtensions
                 }
         }
 
-        private static Array CopyArrayValues(Array input, Array source)
+        private static Array CopyArrayValues(Array input, IEnumerable source)
         {
-            for (int i = 0; i < source.Length; i++)
-            {
-                var item = source.GetValue(i);
-                var type = item.GetType();
-                if (type.IsValueType ||
-                    type.IsType())
+            source
+                .ForEach((index, item) =>
                 {
-                    input.SetValue(item, i);
-                }
-                else if (type.IsString())
-                {
-                    //strings, we don't want a ref to the string value, we want a copy
-                    input.SetValue(item.ToNullSafeString().Copy(), i);
-                }
-                else if (type.IsClass)
-                {
-                    input.SetValue(item.Clone(), i);
-                }
-
-            }
+                    var type = item.GetType();
+                    if (type.IsValueType || type.IsType())
+                    {
+                        input.SetValue(item, index);
+                    }
+                    else if (type.IsString())
+                    {
+                        input.SetValue(item.ToNullSafeString().Copy(), index);
+                    }
+                    else if (type.IsClass)
+                    {
+                        input.SetValue(item.Clone(), index);
+                    }
+                });
 
             return input;
         }
 
-        private static IList CopyListvalues(IList input, IList source)
+        private static IList CopyListValues(IList input, IEnumerable source)
         {
-            foreach (var item in source)
-            {
-                var type = item.GetType();
-                if (type.IsValueType ||
-                    type.IsType())
-                {
-                    input.Add(item);
-                }
-                else if (type.IsString())
-                {
-                    //strings, we don't want a ref to the string value, we want a copy
-                    input.Add(item.ToNullSafeString().Copy());
-                }
-                else if (type.IsClass)
-                {
-                    input.Add(item.Clone());
-                }
-            }
+            var groups = source
+                .Cast<object>()
+                .ToLookup(i => i.GetType(), i => i);
+
+            input.AddRange(
+                groups
+                    .Where(i => i.Key.IsValueType || i.Key.IsType())
+                    .SelectMany(i => i)
+            );
+
+            input.AddRange(
+                groups
+                    .Where(i => i.Key.IsString())
+                    .SelectMany(i => i)
+                    .Select(i => i.ToNullSafeString().Copy())
+            );
+
+            input.AddRange(
+                groups
+                    .Where(i => i.Key.IsClass)
+                    .SelectMany(i => i)
+                    .Select(i => i.Clone())
+            );
 
             return input;
         }
